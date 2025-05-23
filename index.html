@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물류관리사 기출문제 해설</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .heart-level-0 { color: #ccc; }
+        .heart-level-1 { color: #ff7f50; } /* Coral */
+        .heart-level-2 { color: #ff6347; } /* Tomato */
+        .heart-level-3 { color: #dc143c; } /* Crimson */
+
+        .active-strikethrough {
+            color: red !important;
+            text-decoration: line-through;
+        }
+        .question-block.hidden {
+            display: none;
+        }
+        .filter-btn.active {
+            background-color: #c2410c; /* Darker Orange for active filter */
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .show-all-btn.active {
+             background-color: #0369a1; /* Darker Sky for active 'show all' */
+             box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .choices-table, .question-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .choices-table th, .choices-table td,
+        .question-table th, .question-table td {
+            border: 1px solid #e2e8f0; /* Tailwind slate-200 */
+            padding: 0.5rem;
+        }
+        .choices-table th {
+            background-color: #f1f5f9; /* Tailwind slate-100 */
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <header class="bg-sky-700 text-white p-4 sm:p-6 text-center shadow-md">
+        <h1 class="text-2xl sm:text-3xl font-bold">물류관리사 기출문제 해설</h1>
+        <div class="mt-3 sm:mt-4 flex flex-wrap justify-center items-center gap-2">
+            <button id="show-all-btn" class="show-all-btn bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg text-xs sm:text-sm transition-colors">
+                모든 문제
+            </button>
+            <button id="show-incorrect-1-btn" data-level="1" class="filter-btn bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg text-xs sm:text-sm transition-colors">
+                1회 이상 틀림
+            </button>
+            <button id="show-incorrect-2-btn" data-level="2" class="filter-btn bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg text-xs sm:text-sm transition-colors">
+                2회 이상 틀림
+            </button>
+            <button id="show-incorrect-3-btn" data-level="3" class="filter-btn bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg text-xs sm:text-sm transition-colors">
+                3회 틀림
+            </button>
+        </div>
+    </header>
+
+    <nav class="bg-sky-100 p-3 sm:p-4 text-center border-b border-sky-300 shadow">
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
+            <div>
+                <label for="subject-select" class="mr-2 font-semibold text-sky-700">과목 선택:</label>
+                <select id="subject-select" class="p-2 border border-sky-300 rounded-md text-sm focus:ring-sky-500 focus:border-sky-500">
+                    <option value="">-- 과목 선택 --</option>
+                    <option value="logistics">물류관리론</option>
+                    {/* 다른 과목 옵션은 필요시 추가 */}
+                </select>
+            </div>
+            <div>
+                <label for="year-select" class="mr-2 font-semibold text-sky-700">연도 선택:</label>
+                <select id="year-select" class="p-2 border border-sky-300 rounded-md text-sm focus:ring-sky-500 focus:border-sky-500">
+                    <option value="">-- 연도 선택 --</option>
+                    <option value="2017">2017년</option>
+                    {/* 다른 연도 옵션은 필요시 추가 */}
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <main id="question-list-area" class="p-4 sm:p-6">
+        <p id="initial-message" class="text-center text-slate-600 text-lg mt-12">위에 과목과 연도를 선택하여 기출문제를 확인하세요.</p>
+    </main>
+
+    <footer class="text-center p-4 mt-8 text-slate-500 text-sm border-t border-slate-300">
+        <p>&copy; <span id="current-year"></span> 물류관리사 학습 도우미</p>
+    </footer>
+
+    <script>
+    // --- Global State and Constants ---
+    let DUMMY_QUESTIONS_DB = {}; // 데이터를 불러와서 채울 객체
+
+    let incorrectnessCounts = {}; 
+    let currentFilterState = {
+        subject: "",
+        year: "",
+        incorrectFilterLevel: 0 
+    };
+
+    // --- DOM Elements ---
+    const subjectSelect = document.getElementById('subject-select');
+    const yearSelect = document.getElementById('year-select');
+    const questionListArea = document.getElementById('question-list-area');
+    const initialMessage = document.getElementById('initial-message');
+    const currentYearSpan = document.getElementById('current-year');
+
+    const showAllBtn = document.getElementById('show-all-btn');
+    const filterIncorrect1Btn = document.getElementById('show-incorrect-1-btn');
+    const filterIncorrect2Btn = document.getElementById('show-incorrect-2-btn');
+    const filterIncorrect3Btn = document.getElementById('show-incorrect-3-btn');
+    const filterButtons = [filterIncorrect1Btn, filterIncorrect2Btn, filterIncorrect3Btn];
+
+    // --- Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+        currentYearSpan.textContent = new Date().getFullYear();
+        loadIncorrectnessCounts();
+        setupEventListeners();
+        // 페이지 로드 시 기본 선택값(있다면) 또는 빈 값으로 데이터 로드 시도
+        // 초기에는 선택된 값이 없으므로, loadQuestionDataAndRender는 initialMessage를 표시할 것입니다.
+        currentFilterState.subject = subjectSelect.value; // 초기 선택값 반영
+        currentFilterState.year = yearSelect.value;     // 초기 선택값 반영
+        loadQuestionDataAndRender(); 
+    });
+
+    // --- Event Setup ---
+    function setupEventListeners() {
+        subjectSelect.addEventListener('change', handleSubjectYearChange);
+        yearSelect.addEventListener('change', handleSubjectYearChange);
+
+        showAllBtn.addEventListener('click', () => setIncorrectFilterLevel(0));
+        filterIncorrect1Btn.addEventListener('click', () => setIncorrectFilterLevel(1));
+        filterIncorrect2Btn.addEventListener('click', () => setIncorrectFilterLevel(2));
+        filterIncorrect3Btn.addEventListener('click', () => setIncorrectFilterLevel(3));
+
+        questionListArea.addEventListener('click', (event) => {
+            const target = event.target;
+            if (target.matches('.show-answer-btn')) {
+                const questionId = target.dataset.questionId;
+                toggleAnswerVisibility(questionId, target);
+            } else if (target.matches('.incorrectness-toggle-icon')) {
+                const questionId = target.dataset.questionId;
+                incrementIncorrectness(questionId, target);
+            }
+        });
+    }
+
+    // --- Data Loading and State Changes ---
+    function handleSubjectYearChange() {
+        currentFilterState.subject = subjectSelect.value;
+        currentFilterState.year = yearSelect.value;
+        loadQuestionDataAndRender(); 
+    }
+
+    async function loadQuestionDataAndRender() {
+        const selectedSubject = currentFilterState.subject;
+        const selectedYear = currentFilterState.year;
+
+        let fileName = ""; 
+        if (selectedSubject === "logistics" && selectedYear === "2017") {
+            fileName = "logistics_2017-1.json"; // HTML 파일과 동일한 경로에 있다고 가정
+        }
+        // 예시: 다른 과목/연도 파일 로드 로직
+        // else if (selectedSubject === "transport" && selectedYear === "2018") {
+        //    fileName = "transport_2018.json";
+        // }
+
+        if (fileName) {
+            initialMessage.style.display = 'none'; // 로딩 시작 시 초기 메시지 숨김
+            questionListArea.innerHTML = '<p class="text-center text-slate-600 text-lg mt-12">문제 데이터를 불러오는 중...</p>'; // 로딩 메시지
+            try {
+                const response = await fetch(fileName);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} - ${fileName}`);
+                }
+                DUMMY_QUESTIONS_DB = await response.json(); 
+                console.log("JSON 데이터 로드 성공:", fileName);
+            } catch (error) {
+                console.error("JSON 데이터 로드 실패:", error);
+                questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">문제 데이터를 불러오는 데 실패했습니다. (${fileName} 파일을 확인해주세요.)</p>`;
+                DUMMY_QUESTIONS_DB = {}; 
+            }
+        } else {
+            questionListArea.innerHTML = ''; 
+            if (selectedSubject && selectedYear) { // 과목과 연도가 선택되었지만 해당 파일명이 없는 경우
+                 questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">선택하신 과목(${subjectSelect.options[subjectSelect.selectedIndex].text})과 연도(${selectedYear}년)에 해당하는 문제 데이터가 아직 준비되지 않았습니다.</p>`;
+            } else { // 초기 상태 또는 과목/연도 미선택 시
+                questionListArea.appendChild(initialMessage);
+                initialMessage.style.display = 'block';
+            }
+            DUMMY_QUESTIONS_DB = {}; 
+        }
+        updateActiveFilterButton(); 
+        renderQuestions();
+    }
+
+
+    function setIncorrectFilterLevel(level) {
+        currentFilterState.incorrectFilterLevel = level;
+        updateActiveFilterButton();
+        renderQuestions();
+    }
+
+    function updateActiveFilterButton() {
+        showAllBtn.classList.remove('active');
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+
+        const level = currentFilterState.incorrectFilterLevel;
+        if (level === 0) {
+            showAllBtn.classList.add('active');
+        } else if (level >= 1 && level <= 3) {
+            const activeButton = document.getElementById(`show-incorrect-${level}-btn`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+        }
+    }
+
+    function loadIncorrectnessCounts() {
+        const savedCounts = localStorage.getItem('incorrectnessCounts');
+        if (savedCounts) {
+            incorrectnessCounts = JSON.parse(savedCounts);
+        }
+    }
+
+    function saveIncorrectnessCounts() {
+        localStorage.setItem('incorrectnessCounts', JSON.stringify(incorrectnessCounts));
+    }
+
+    function incrementIncorrectness(questionId, toggleElement) {
+        let currentCount = incorrectnessCounts[questionId] || 0;
+        currentCount = (currentCount + 1) % 4; 
+        incorrectnessCounts[questionId] = currentCount;
+        saveIncorrectnessCounts();
+        updateIncorrectnessToggleDisplay(toggleElement, currentCount);
+
+        if (currentFilterState.incorrectFilterLevel > 0) {
+             renderQuestions(); 
+        }
+    }
+
+    function updateIncorrectnessToggleDisplay(toggleElement, count) {
+        if (!toggleElement) return;
+        const hearts = ['♡', '♥', '♥♥', '♥♥♥'];
+        toggleElement.textContent = hearts[count] || '♡';
+        toggleElement.classList.remove('heart-level-0', 'heart-level-1', 'heart-level-2', 'heart-level-3');
+        toggleElement.classList.add(`heart-level-${count}`);
+        toggleElement.dataset.incorrectCount = count;
+    }
+
+    function toggleAnswerVisibility(questionId, button) {
+        const answerBlock = document.getElementById(`ans-${questionId}`);
+        const questionBlock = document.getElementById(`q-${questionId}`);
+        if (!answerBlock || !questionBlock) return;
+
+        const incorrectParts = questionBlock.querySelectorAll('.choices .incorrect-part-marker');
+
+        if (answerBlock.style.display === 'none' || answerBlock.style.display === '') {
+            answerBlock.style.display = 'block';
+            button.textContent = '정답/해설 숨기기';
+            button.classList.replace('bg-sky-600', 'bg-amber-500');
+            button.classList.replace('hover:bg-sky-700', 'hover:bg-amber-600');
+            incorrectParts.forEach(span => span.classList.add('active-strikethrough'));
+        } else {
+            answerBlock.style.display = 'none';
+            button.textContent = '정답/해설 보기';
+            button.classList.replace('bg-amber-500', 'bg-sky-600');
+            button.classList.replace('hover:bg-amber-600', 'hover:bg-sky-700');
+            incorrectParts.forEach(span => span.classList.remove('active-strikethrough'));
+        }
+    }
+
+    // --- Rendering ---
+    function createQuestionHTML(question) {
+        const incorrectCount = incorrectnessCounts[question.id] || 0;
+        const hearts = ['♡', '♥', '♥♥', '♥♥♥'];
+
+        let choicesHTML = '';
+        if (question.choices) {
+            choicesHTML = `<ul class="choices list-none pl-0 sm:pl-5 mb-3 space-y-1 text-slate-700">
+                ${question.choices.map((choice) => `<li class="ml-0 sm:ml-4">${choice}</li>`).join('')}
+            </ul>`;
+        }
+
+        let missingInfoHTML = '';
+        if (question.missingInfo) {
+            missingInfoHTML = `<p class="text-slate-500 italic my-2">${question.missingInfo}</p>`;
+        }
+
+        let explanationHTML = '';
+        if (question.explanation) {
+            explanationHTML += `<div class="mt-1">${question.explanation}</div>`;
+        }
+        if (question.purpose) {
+             explanationHTML += `<div class="mt-2 pt-2 border-t border-sky-200">${question.purpose}</div>`;
+        }
+        
+        let titleHTML = question.title;
+
+        return `
+            <div id="q-${question.id}" class="question-block bg-white p-4 sm:p-5 rounded-lg shadow-lg mb-6" data-question-id="${question.id}">
+                <div class="flex justify-between items-start mb-2">
+                    <div class="text-lg font-semibold text-sky-800 flex-grow pr-2">${titleHTML}</div>
+                    <span class="incorrectness-toggle-icon heart-level-${incorrectCount} text-2xl cursor-pointer select-none"
+                          data-question-id="${question.id}"
+                          data-incorrect-count="${incorrectCount}"
+                          title="틀린 횟수 표시 (클릭하여 변경)">
+                        ${hearts[incorrectCount] || '♡'}
+                    </span>
+                </div>
+                ${missingInfoHTML}
+                ${choicesHTML}
+                <button class="show-answer-btn bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-md text-sm transition-colors mb-2"
+                        data-question-id="${question.id}">
+                    정답/해설 보기
+                </button>
+                <div class="answer-block bg-sky-50 p-3 rounded-md border-l-4 border-sky-500 mt-2 text-sm"
+                     id="ans-${question.id}" style="display:none;">
+                    <strong class="text-sky-700">정답: ${question.answerText}</strong><br>
+                    ${explanationHTML}
+                </div>
+            </div>
+        `;
+    }
+
+    function renderQuestions() {
+        questionListArea.innerHTML = ''; // 이전 질문 목록을 지웁니다.
+
+        const { subject, year, incorrectFilterLevel } = currentFilterState;
+
+        // 과목이나 연도가 선택되지 않았거나, DUMMY_QUESTIONS_DB가 비어있으면 초기 메시지를 표시합니다.
+        if (!subject || !year || Object.keys(DUMMY_QUESTIONS_DB).length === 0 || !DUMMY_QUESTIONS_DB[subject] || !DUMMY_QUESTIONS_DB[subject][year]) {
+            if (subject && year) { // 파일 로드 실패 또는 해당 데이터 없음
+                 questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">선택하신 과목(${subjectSelect.options[subjectSelect.selectedIndex].text})과 연도(${year}년)에 해당하는 문제 데이터를 불러오지 못했거나 데이터가 없습니다.</p>`;
+            } else { // 초기 상태
+                questionListArea.appendChild(initialMessage);
+                initialMessage.style.display = 'block';
+            }
+            return;
+        }
+        initialMessage.style.display = 'none'; // 데이터가 있으면 초기 메시지 숨김
+
+        const questionsForSubjectYear = DUMMY_QUESTIONS_DB[subject]?.[year] || [];
+        let questionsToDisplay = questionsForSubjectYear;
+
+        if (incorrectFilterLevel > 0) {
+            questionsToDisplay = questionsForSubjectYear.filter(q => {
+                const count = incorrectnessCounts[q.id] || 0;
+                if (incorrectFilterLevel === 1) return count >= 1;
+                if (incorrectFilterLevel === 2) return count >= 2;
+                if (incorrectFilterLevel === 3) return count === 3;
+                return false;
+            });
+        }
+
+        if (questionsToDisplay.length === 0) {
+            let message = '선택하신 조건에 해당하는 문제가 없습니다.';
+             if (incorrectFilterLevel > 0) {
+                const levelTexts = ["", "1회 이상 틀림", "2회 이상 틀림", "3회 틀림"];
+                message = `선택하신 조건(과목: ${subjectSelect.options[subjectSelect.selectedIndex].text}, 연도: ${year}년, 틀린 횟수: ${levelTexts[incorrectFilterLevel]})에 맞는 문제가 없습니다.`;
+            } else {
+                 message = `선택하신 과목(${subjectSelect.options[subjectSelect.selectedIndex].text})과 연도(${year}년)에 해당하는 문제가 없습니다.`;
+            }
+            questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">${message}</p>`;
+            return;
+        }
+        
+        const heading = document.createElement('h2');
+        heading.className = 'text-xl sm:text-2xl font-bold text-sky-700 mb-4';
+        heading.textContent = `${yearSelect.options[yearSelect.selectedIndex].text} ${subjectSelect.options[subjectSelect.selectedIndex].text} 문제`;
+        questionListArea.appendChild(heading);
+
+        const fragment = document.createDocumentFragment();
+        questionsToDisplay.forEach(question => {
+            const questionDiv = document.createElement('div');
+            questionDiv.innerHTML = createQuestionHTML(question).trim(); 
+            if (questionDiv.firstChild) {
+                 fragment.appendChild(questionDiv.firstChild);
+            }
+        });
+        questionListArea.appendChild(fragment);
+    }
+    </script>
+</body>
+</html>
