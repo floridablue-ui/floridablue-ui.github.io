@@ -44,6 +44,18 @@
         .choices-table th {
             background-color: #f1f5f9; /* Tailwind slate-100 */
         }
+        .question-title-text > * { /* 문제 제목 내 HTML 요소들 스타일 유지 */
+            display: inline;
+        }
+        .question-title-text table {
+            display: table;
+            width: auto; 
+            margin: 0.5em 0;
+        }
+        mark { /* 검색어 하이라이트 스타일 */
+            background-color: yellow;
+            padding: 0.1em;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -66,23 +78,24 @@
         </div>
     </header>
 
-    <nav class="bg-sky-100 p-3 sm:p-4 text-center border-b border-sky-300 shadow">
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
+    <nav class="bg-sky-100 p-3 sm:p-4 text-center border-b border-sky-300 shadow sticky top-0 z-20">
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-2 sm:gap-4">
             <div>
                 <label for="subject-select" class="mr-2 font-semibold text-sky-700">과목 선택:</label>
                 <select id="subject-select" class="p-2 border border-sky-300 rounded-md text-sm focus:ring-sky-500 focus:border-sky-500">
                     <option value="">-- 과목 선택 --</option>
-                    <option value="logistics">물류관리론</option>
-                    {/* 다른 과목 옵션은 필요시 추가 */}
                 </select>
             </div>
             <div>
                 <label for="year-select" class="mr-2 font-semibold text-sky-700">연도 선택:</label>
                 <select id="year-select" class="p-2 border border-sky-300 rounded-md text-sm focus:ring-sky-500 focus:border-sky-500">
                     <option value="">-- 연도 선택 --</option>
-                    <option value="2017">2017년</option>
-                    {/* 다른 연도 옵션은 필요시 추가 */}
                 </select>
+            </div>
+            <div class="mt-2 sm:mt-0 w-full sm:w-auto flex justify-center">
+                <label for="search-input" class="sr-only">검색</label> <input type="text" id="search-input" placeholder="키워드 검색..." class="p-2 border border-sky-300 rounded-l-md text-sm focus:ring-sky-500 focus:border-sky-500 w-40 sm:w-auto">
+                <button id="search-button" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-3 text-sm transition-colors">검색</button>
+                <button id="clear-search-button" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-3 rounded-r-md text-sm transition-colors">X</button>
             </div>
         </div>
     </nav>
@@ -97,13 +110,39 @@
 
     <script>
     // --- Global State and Constants ---
-    let DUMMY_QUESTIONS_DB = {}; // 데이터를 불러와서 채울 객체
+    let DUMMY_QUESTIONS_DB = {}; 
+    const FILE_MAPPINGS = { 
+        'logistics': {
+            '2017': 'logistics_2017-1.json' 
+        },
+        'cargo_transport': {
+            '2017': 'logistics_2017-2.json' 
+        },
+        'international_logistics': { 
+            '2017': null 
+        },
+        'storage_stevedoring': { 
+            '2017': null 
+        },
+        'logistics_laws': { 
+            '2017': null 
+        }
+    };
+    const SUBJECT_DISPLAY_NAMES = {
+        'logistics': '물류관리론',
+        'cargo_transport': '화물운송론',
+        'international_logistics': '국제물류론',
+        'storage_stevedoring': '보관하역론',
+        'logistics_laws': '물류관련법규'
+    };
+
 
     let incorrectnessCounts = {}; 
     let currentFilterState = {
         subject: "",
         year: "",
-        incorrectFilterLevel: 0 
+        incorrectFilterLevel: 0,
+        searchTerm: "" 
     };
 
     // --- DOM Elements ---
@@ -119,17 +158,48 @@
     const filterIncorrect3Btn = document.getElementById('show-incorrect-3-btn');
     const filterButtons = [filterIncorrect1Btn, filterIncorrect2Btn, filterIncorrect3Btn];
 
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const clearSearchButton = document.getElementById('clear-search-button');
+
+
     // --- Initialization ---
     document.addEventListener('DOMContentLoaded', () => {
         currentYearSpan.textContent = new Date().getFullYear();
+        populateSubjectSelect(); 
+        populateYearSelect(); 
         loadIncorrectnessCounts();
         setupEventListeners();
-        // 페이지 로드 시 기본 선택값(있다면) 또는 빈 값으로 데이터 로드 시도
-        // 초기에는 선택된 값이 없으므로, loadQuestionDataAndRender는 initialMessage를 표시할 것입니다.
-        currentFilterState.subject = subjectSelect.value; // 초기 선택값 반영
-        currentFilterState.year = yearSelect.value;     // 초기 선택값 반영
+        
+        subjectSelect.value = 'logistics'; 
+        yearSelect.value = '2017'; 
+
+        currentFilterState.subject = subjectSelect.value; 
+        currentFilterState.year = yearSelect.value;     
         loadQuestionDataAndRender(); 
     });
+
+    function populateSubjectSelect() {
+        subjectSelect.innerHTML = '<option value="">-- 과목 선택 --</option>'; 
+        for (const key in SUBJECT_DISPLAY_NAMES) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = SUBJECT_DISPLAY_NAMES[key];
+            subjectSelect.appendChild(option);
+        }
+    }
+
+    function populateYearSelect() {
+        yearSelect.innerHTML = '<option value="">-- 연도 선택 --</option>'; 
+        const LATEST_YEAR_TO_SHOW = 2024; 
+        for (let y = LATEST_YEAR_TO_SHOW; y >= 2017; y--) {
+            const option = document.createElement('option');
+            option.value = y.toString();
+            option.textContent = `${y}년`;
+            yearSelect.appendChild(option);
+        }
+    }
+
 
     // --- Event Setup ---
     function setupEventListeners() {
@@ -140,6 +210,14 @@
         filterIncorrect1Btn.addEventListener('click', () => setIncorrectFilterLevel(1));
         filterIncorrect2Btn.addEventListener('click', () => setIncorrectFilterLevel(2));
         filterIncorrect3Btn.addEventListener('click', () => setIncorrectFilterLevel(3));
+
+        searchButton.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
+        });
+        clearSearchButton.addEventListener('click', clearSearch);
 
         questionListArea.addEventListener('click', (event) => {
             const target = event.target;
@@ -153,53 +231,98 @@
         });
     }
 
-    // --- Data Loading and State Changes ---
-    function handleSubjectYearChange() {
-        currentFilterState.subject = subjectSelect.value;
-        currentFilterState.year = yearSelect.value;
-        loadQuestionDataAndRender(); 
+    // --- Search Logic ---
+    function handleSearch() {
+        currentFilterState.searchTerm = searchInput.value.trim().toLowerCase();
+        renderQuestions(); 
     }
 
+    function clearSearch() {
+        searchInput.value = "";
+        currentFilterState.searchTerm = "";
+        renderQuestions(); 
+    }
+
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
+    }
+
+    function highlightText(text, term) {
+        if (!term || term === "" || typeof text !== 'string') return text;
+        try {
+            const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        } catch (e) {
+            console.error("Error in highlightText regex:", e);
+            return text; 
+        }
+    }
+
+
+    // --- Data Loading and State Changes ---
     async function loadQuestionDataAndRender() {
         const selectedSubject = currentFilterState.subject;
         const selectedYear = currentFilterState.year;
+        console.log(`[loadQuestionDataAndRender] Attempting to load data for Subject: ${selectedSubject}, Year: ${selectedYear}`);
 
-        let fileName = ""; 
-        if (selectedSubject === "logistics" && selectedYear === "2017") {
-            fileName = "logistics_2017-1.json"; // HTML 파일과 동일한 경로에 있다고 가정
-        }
-        // 예시: 다른 과목/연도 파일 로드 로직
-        // else if (selectedSubject === "transport" && selectedYear === "2018") {
-        //    fileName = "transport_2018.json";
-        // }
+        DUMMY_QUESTIONS_DB = {}; 
+        const fileName = FILE_MAPPINGS[selectedSubject]?.[selectedYear];
+        console.log(`[loadQuestionDataAndRender] Mapped fileName: ${fileName}`);
 
         if (fileName) {
-            initialMessage.style.display = 'none'; // 로딩 시작 시 초기 메시지 숨김
-            questionListArea.innerHTML = '<p class="text-center text-slate-600 text-lg mt-12">문제 데이터를 불러오는 중...</p>'; // 로딩 메시지
+            initialMessage.style.display = 'none'; 
+            questionListArea.innerHTML = '<p class="text-center text-slate-600 text-lg mt-12">문제 데이터를 불러오는 중...</p>'; 
             try {
-                const response = await fetch(fileName);
+                console.log(`[loadQuestionDataAndRender] Fetching: ./${fileName}`);
+                const response = await fetch('./' + fileName);
+                console.log(`[loadQuestionDataAndRender] Response for ${fileName}: status=${response.status}, ok=${response.ok}`);
+
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} - ${fileName}`);
+                    throw new Error(`HTTP error! status: ${response.status} for ${fileName}. URL: ${response.url}`);
                 }
-                DUMMY_QUESTIONS_DB = await response.json(); 
-                console.log("JSON 데이터 로드 성공:", fileName);
+                const jsonData = await response.json();
+                console.log(`[loadQuestionDataAndRender] Successfully parsed JSON for ${fileName}. Keys: ${Object.keys(jsonData)}`);
+                
+                const subjectKeyFromFile = Object.keys(jsonData)[0]; 
+                console.log(`[loadQuestionDataAndRender] Subject key from file: ${subjectKeyFromFile}`);
+
+                if (subjectKeyFromFile && jsonData[subjectKeyFromFile] && jsonData[subjectKeyFromFile][selectedYear]) {
+                    if (selectedSubject === subjectKeyFromFile) {
+                        DUMMY_QUESTIONS_DB[selectedSubject] = {
+                            [selectedYear]: jsonData[subjectKeyFromFile][selectedYear]
+                        };
+                        console.log(`[loadQuestionDataAndRender] Data assigned for ${selectedSubject}/${selectedYear}. Question count: ${DUMMY_QUESTIONS_DB[selectedSubject][selectedYear]?.length}`);
+                    } else {
+                        console.warn(`[loadQuestionDataAndRender] Mismatch: Selected subject is '${selectedSubject}', but file's top key is '${subjectKeyFromFile}'. File: ${fileName}`);
+                    }
+                } else {
+                    console.warn(`[loadQuestionDataAndRender] Data structure error in ${fileName}.`);
+                }
             } catch (error) {
-                console.error("JSON 데이터 로드 실패:", error);
-                questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">문제 데이터를 불러오는 데 실패했습니다. (${fileName} 파일을 확인해주세요.)</p>`;
-                DUMMY_QUESTIONS_DB = {}; 
+                console.error("[loadQuestionDataAndRender] JSON 데이터 로드 또는 처리 중 오류:", error);
+                questionListArea.innerHTML = `<p class="text-center text-red-600 text-lg mt-12">문제 데이터를 불러오는 데 실패했습니다. (${fileName} 파일을 확인해주세요. 오류: ${error.message})</p>`;
             }
-        } else {
+        } else { 
             questionListArea.innerHTML = ''; 
-            if (selectedSubject && selectedYear) { // 과목과 연도가 선택되었지만 해당 파일명이 없는 경우
-                 questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">선택하신 과목(${subjectSelect.options[subjectSelect.selectedIndex].text})과 연도(${selectedYear}년)에 해당하는 문제 데이터가 아직 준비되지 않았습니다.</p>`;
-            } else { // 초기 상태 또는 과목/연도 미선택 시
+            if (selectedSubject && selectedYear) { 
+                 questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">선택하신 과목(${SUBJECT_DISPLAY_NAMES[selectedSubject] || selectedSubject})과 연도(${selectedYear}년)에 대한 문제 파일이 설정되지 않았습니다.</p>`;
+                 console.log(`[loadQuestionDataAndRender] No file mapping for ${selectedSubject}/${selectedYear}.`);
+            } else { 
                 questionListArea.appendChild(initialMessage);
                 initialMessage.style.display = 'block';
+                console.log(`[loadQuestionDataAndRender] Subject or Year not selected. Showing initial message.`);
             }
-            DUMMY_QUESTIONS_DB = {}; 
         }
         updateActiveFilterButton(); 
         renderQuestions();
+    }
+
+    function handleSubjectYearChange() {
+        currentFilterState.subject = subjectSelect.value;
+        currentFilterState.year = yearSelect.value;
+        searchInput.value = ""; 
+        currentFilterState.searchTerm = "";
+        loadQuestionDataAndRender(); 
     }
 
 
@@ -227,7 +350,12 @@
     function loadIncorrectnessCounts() {
         const savedCounts = localStorage.getItem('incorrectnessCounts');
         if (savedCounts) {
-            incorrectnessCounts = JSON.parse(savedCounts);
+            try {
+                incorrectnessCounts = JSON.parse(savedCounts);
+            } catch (e) {
+                console.error("Error parsing incorrectnessCounts from localStorage", e);
+                incorrectnessCounts = {};
+            }
         }
     }
 
@@ -242,7 +370,7 @@
         saveIncorrectnessCounts();
         updateIncorrectnessToggleDisplay(toggleElement, currentCount);
 
-        if (currentFilterState.incorrectFilterLevel > 0) {
+        if (currentFilterState.incorrectFilterLevel > 0 || currentFilterState.searchTerm) {
              renderQuestions(); 
         }
     }
@@ -258,23 +386,31 @@
 
     function toggleAnswerVisibility(questionId, button) {
         const answerBlock = document.getElementById(`ans-${questionId}`);
-        const questionBlock = document.getElementById(`q-${questionId}`);
-        if (!answerBlock || !questionBlock) return;
+        const questionBlock = document.getElementById(`q-${questionId}`); 
 
-        const incorrectParts = questionBlock.querySelectorAll('.choices .incorrect-part-marker');
+        if (!answerBlock || !questionBlock) {
+            console.warn(`Answer block or Question block not found for ID: ${questionId}`);
+            return;
+        }
+
+        const incorrectSpans = questionBlock.querySelectorAll('.choices .incorrect-part-marker');
 
         if (answerBlock.style.display === 'none' || answerBlock.style.display === '') {
             answerBlock.style.display = 'block';
             button.textContent = '정답/해설 숨기기';
             button.classList.replace('bg-sky-600', 'bg-amber-500');
             button.classList.replace('hover:bg-sky-700', 'hover:bg-amber-600');
-            incorrectParts.forEach(span => span.classList.add('active-strikethrough'));
+            incorrectSpans.forEach(span => {
+                span.classList.add('active-strikethrough');
+            });
         } else {
             answerBlock.style.display = 'none';
             button.textContent = '정답/해설 보기';
             button.classList.replace('bg-amber-500', 'bg-sky-600');
             button.classList.replace('hover:bg-amber-600', 'hover:bg-sky-700');
-            incorrectParts.forEach(span => span.classList.remove('active-strikethrough'));
+            incorrectSpans.forEach(span => {
+                span.classList.remove('active-strikethrough');
+            });
         }
     }
 
@@ -282,11 +418,38 @@
     function createQuestionHTML(question) {
         const incorrectCount = incorrectnessCounts[question.id] || 0;
         const hearts = ['♡', '♥', '♥♥', '♥♥♥'];
+        const searchTerm = currentFilterState.searchTerm;
 
+        let titleToDisplay = question.title;
+        if (searchTerm) {
+            titleToDisplay = highlightText(question.title, searchTerm);
+        }
+        
         let choicesHTML = '';
         if (question.choices) {
             choicesHTML = `<ul class="choices list-none pl-0 sm:pl-5 mb-3 space-y-1 text-slate-700">
-                ${question.choices.map((choice) => `<li class="ml-0 sm:ml-4">${choice}</li>`).join('')}
+                ${question.choices.map((choice) => {
+                    let choiceToDisplay = choice;
+                    if (searchTerm) {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = choice; 
+                        function highlightNodes(node) {
+                            if (node.nodeType === Node.TEXT_NODE) {
+                                const highlightedContent = highlightText(node.textContent, searchTerm);
+                                if (highlightedContent !== node.textContent) {
+                                    const span = document.createElement('span'); 
+                                    span.innerHTML = highlightedContent;
+                                    node.parentNode.replaceChild(span, node);
+                                }
+                            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                                Array.from(node.childNodes).forEach(highlightNodes);
+                            }
+                        }
+                        highlightNodes(tempDiv);
+                        choiceToDisplay = tempDiv.innerHTML;
+                    }
+                    return `<li class="ml-0 sm:ml-4">${choiceToDisplay}</li>`;
+                }).join('')}
             </ul>`;
         }
 
@@ -295,20 +458,25 @@
             missingInfoHTML = `<p class="text-slate-500 italic my-2">${question.missingInfo}</p>`;
         }
 
-        let explanationHTML = '';
+        let explanationText = question.explanation || "";
+        let purposeText = question.purpose || "";
+        if (searchTerm) {
+            explanationText = highlightText(explanationText, searchTerm); 
+            purposeText = highlightText(purposeText, searchTerm);
+        }
+
+        let explanationBlockHTML = '';
         if (question.explanation) {
-            explanationHTML += `<div class="mt-1">${question.explanation}</div>`;
+            explanationBlockHTML += `<div class="mt-1">${explanationText}</div>`;
         }
         if (question.purpose) {
-             explanationHTML += `<div class="mt-2 pt-2 border-t border-sky-200">${question.purpose}</div>`;
+             explanationBlockHTML += `<div class="mt-2 pt-2 border-t border-sky-200">${purposeText}</div>`;
         }
         
-        let titleHTML = question.title;
-
         return `
             <div id="q-${question.id}" class="question-block bg-white p-4 sm:p-5 rounded-lg shadow-lg mb-6" data-question-id="${question.id}">
                 <div class="flex justify-between items-start mb-2">
-                    <div class="text-lg font-semibold text-sky-800 flex-grow pr-2">${titleHTML}</div>
+                    <div class="text-lg font-semibold text-sky-800 flex-grow pr-2 question-title-text">${titleToDisplay}</div>
                     <span class="incorrectness-toggle-icon heart-level-${incorrectCount} text-2xl cursor-pointer select-none"
                           data-question-id="${question.id}"
                           data-incorrect-count="${incorrectCount}"
@@ -325,68 +493,105 @@
                 <div class="answer-block bg-sky-50 p-3 rounded-md border-l-4 border-sky-500 mt-2 text-sm"
                      id="ans-${question.id}" style="display:none;">
                     <strong class="text-sky-700">정답: ${question.answerText}</strong><br>
-                    ${explanationHTML}
+                    ${explanationBlockHTML}
                 </div>
             </div>
         `;
     }
 
     function renderQuestions() {
-        questionListArea.innerHTML = ''; // 이전 질문 목록을 지웁니다.
+        questionListArea.innerHTML = ''; 
+        console.log("[renderQuestions] Rendering questions. Current state:", currentFilterState);
+        console.log("[renderQuestions] DUMMY_QUESTIONS_DB (first 200 chars):", JSON.stringify(DUMMY_QUESTIONS_DB).substring(0,200)+"...");
 
-        const { subject, year, incorrectFilterLevel } = currentFilterState;
+        const { subject, year, incorrectFilterLevel, searchTerm } = currentFilterState;
 
-        // 과목이나 연도가 선택되지 않았거나, DUMMY_QUESTIONS_DB가 비어있으면 초기 메시지를 표시합니다.
-        if (!subject || !year || Object.keys(DUMMY_QUESTIONS_DB).length === 0 || !DUMMY_QUESTIONS_DB[subject] || !DUMMY_QUESTIONS_DB[subject][year]) {
-            if (subject && year) { // 파일 로드 실패 또는 해당 데이터 없음
-                 questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">선택하신 과목(${subjectSelect.options[subjectSelect.selectedIndex].text})과 연도(${year}년)에 해당하는 문제 데이터를 불러오지 못했거나 데이터가 없습니다.</p>`;
-            } else { // 초기 상태
-                questionListArea.appendChild(initialMessage);
-                initialMessage.style.display = 'block';
-            }
+        if (!subject || !year ) {
+            questionListArea.appendChild(initialMessage);
+            initialMessage.style.display = 'block';
+            console.log("[renderQuestions] Subject or Year not selected. Showing initial message.");
             return;
         }
-        initialMessage.style.display = 'none'; // 데이터가 있으면 초기 메시지 숨김
+        
+        if (!DUMMY_QUESTIONS_DB[subject] || !DUMMY_QUESTIONS_DB[subject][year]) {
+            console.log(`[renderQuestions] No data for ${subject}/${year} in DUMMY_QUESTIONS_DB.`);
+            questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">선택하신 과목(${SUBJECT_DISPLAY_NAMES[subject] || subject})과 연도(${year}년)에 해당하는 문제 데이터를 불러오지 못했거나 데이터가 없습니다.</p>`;
+            return;
+        }
+        initialMessage.style.display = 'none'; 
 
-        const questionsForSubjectYear = DUMMY_QUESTIONS_DB[subject]?.[year] || [];
-        let questionsToDisplay = questionsForSubjectYear;
+        let questionsToDisplay = DUMMY_QUESTIONS_DB[subject][year] || [];
+        console.log(`[renderQuestions] Initial questions for ${subject}/${year}: ${questionsToDisplay.length}`);
 
         if (incorrectFilterLevel > 0) {
-            questionsToDisplay = questionsForSubjectYear.filter(q => {
+            questionsToDisplay = questionsToDisplay.filter(q => {
                 const count = incorrectnessCounts[q.id] || 0;
                 if (incorrectFilterLevel === 1) return count >= 1;
                 if (incorrectFilterLevel === 2) return count >= 2;
                 if (incorrectFilterLevel === 3) return count === 3;
-                return false;
+                return false; 
             });
+            console.log(`[renderQuestions] After incorrectFilter (level ${incorrectFilterLevel}): ${questionsToDisplay.length}`);
         }
+
+        if (searchTerm) {
+            const lowerSearchTerm = searchTerm.toLowerCase();
+            questionsToDisplay = questionsToDisplay.filter(q => {
+                const stripHtml = (html) => {
+                    const tmp = document.createElement("DIV");
+                    tmp.innerHTML = html;
+                    return tmp.textContent || tmp.innerText || "";
+                };
+
+                const titleMatch = stripHtml(q.title)?.toLowerCase().includes(lowerSearchTerm);
+                const choiceMatch = q.choices?.some(choice => stripHtml(choice)?.toLowerCase().includes(lowerSearchTerm));
+                const explanationMatch = stripHtml(q.explanation)?.toLowerCase().includes(lowerSearchTerm);
+                const purposeMatch = stripHtml(q.purpose)?.toLowerCase().includes(lowerSearchTerm);
+                return titleMatch || choiceMatch || explanationMatch || purposeMatch;
+            });
+            console.log(`[renderQuestions] After searchFilter ('${searchTerm}'): ${questionsToDisplay.length}`);
+        }
+
 
         if (questionsToDisplay.length === 0) {
             let message = '선택하신 조건에 해당하는 문제가 없습니다.';
-             if (incorrectFilterLevel > 0) {
+             if (searchTerm) {
+                message = `검색어 '${searchTerm}'에 해당하는 문제가 없습니다.`;
+             } else if (incorrectFilterLevel > 0) {
                 const levelTexts = ["", "1회 이상 틀림", "2회 이상 틀림", "3회 틀림"];
-                message = `선택하신 조건(과목: ${subjectSelect.options[subjectSelect.selectedIndex].text}, 연도: ${year}년, 틀린 횟수: ${levelTexts[incorrectFilterLevel]})에 맞는 문제가 없습니다.`;
+                message = `선택하신 조건(과목: ${SUBJECT_DISPLAY_NAMES[subject] || subject}, 연도: ${year}년, 틀린 횟수: ${levelTexts[incorrectFilterLevel]})에 맞는 문제가 없습니다.`;
             } else {
-                 message = `선택하신 과목(${subjectSelect.options[subjectSelect.selectedIndex].text})과 연도(${year}년)에 해당하는 문제가 없습니다.`;
+                 message = `선택하신 과목(${SUBJECT_DISPLAY_NAMES[subject] || subject})과 연도(${year}년)에 해당하는 문제가 없습니다.`;
             }
             questionListArea.innerHTML = `<p class="text-center text-slate-600 text-lg mt-12">${message}</p>`;
             return;
         }
         
+        const subjectTextElement = Array.from(subjectSelect.options).find(opt => opt.value === subject);
+        const yearTextElement = Array.from(yearSelect.options).find(opt => opt.value === year);
+
+        const subjectText = subjectTextElement ? subjectTextElement.text : (SUBJECT_DISPLAY_NAMES[subject] || subject);
+        const yearText = yearTextElement ? yearTextElement.text : (year ? year + '년' : '');
+        
+        let headingText = `${yearText} ${subjectText} 문제`;
+        if(searchTerm) {
+            headingText += ` (검색어: "${searchTerm}")`;
+        }
         const heading = document.createElement('h2');
         heading.className = 'text-xl sm:text-2xl font-bold text-sky-700 mb-4';
-        heading.textContent = `${yearSelect.options[yearSelect.selectedIndex].text} ${subjectSelect.options[subjectSelect.selectedIndex].text} 문제`;
+        heading.textContent = headingText;
         questionListArea.appendChild(heading);
 
         const fragment = document.createDocumentFragment();
         questionsToDisplay.forEach(question => {
-            const questionDiv = document.createElement('div');
+            const questionDiv = document.createElement('div'); 
             questionDiv.innerHTML = createQuestionHTML(question).trim(); 
             if (questionDiv.firstChild) {
                  fragment.appendChild(questionDiv.firstChild);
             }
         });
         questionListArea.appendChild(fragment);
+        console.log("[renderQuestions] Finished rendering questions.");
     }
     </script>
 </body>
