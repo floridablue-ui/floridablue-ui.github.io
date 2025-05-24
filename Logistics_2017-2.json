@@ -1,0 +1,646 @@
+{
+  "cargo_transport": {
+    "2017": [
+      {
+        "id": "cargo_transport-2017-41",
+        "questionNumber": "41",
+        "title": "41. 정기선운송의 할증료 및 추가운임에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 혼잡할증료(congestion surcharge)는 항구에서 선박 폭주로 대기시간이 장기화될 경우 부과하는 할증료이다.",
+          "② 통화할증료(currency adjustment factor)는 화폐가치 변화에 의한 손실 보전을 위해 부과하는 할증료이다.",
+          "③ 체화료(demurrage charge)는 무료장치기간(free time) 이내에 화물을 CY에서 반출하지 않을 경우 부과하는 요금이다.",
+          "④ 지체료(detention charge)는 비상사태에 대비하여 부과하는 할증료이다.",
+          "⑤ 항구변경료(diversion charge)는 선적 시 지정했던 항구를 선적한 후 변경 시 추가로 부과하는 운임이다."
+        ],
+        "correctChoiceIndex": 3,
+        "answerText": "④번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-42",
+        "questionNumber": "42",
+        "title": "42. 「한국해운조합법」상 한국해운조합이 수행하는 사업에 해당되는 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 해양사고 구제사업<br>ㄴ. 선박임대사업<br>ㄷ. 항만구역 내 도선사업<br>ㄹ. 선박 안전관리체제에 관한 사업<br>ㅁ. 조합원의 사업수행 중 발생하는 재해에 대비한 공제사업</div>",
+        "choices": [
+          "① ㄱ, ㄴ, ㄷ",
+          "② ㄱ, ㄴ, ㅁ",
+          "③ ㄱ, ㄹ, ㅁ",
+          "④ ㄴ, ㄷ, ㄹ",
+          "⑤ ㄷ, ㄹ, ㅁ"
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-43",
+        "questionNumber": "43",
+        "title": "43. 항공운송사업에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 항공운송사업은 생산탄력성이 매우 높다.",
+          "② 항공운송사업은 고정자산이 많아 고정비가 차지하는 비율이 비교적 높다.",
+          "③ 항공운송사업은 고가의 항공기 구입 등 방대한 규모의 선행투자가 필요하다.",
+          "④ 항공운송사업의 운송 서비스는 재고로 저장할 수 없는 특성이 있다.",
+          "⑤ 항공운송사업은 조종사, 객실승무원, 정비사, 운항관리사 등 전문 인력이 필요하다."
+        ],
+        "correctChoiceIndex": 0,
+        "answerText": "①번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-44",
+        "questionNumber": "44",
+        "title": "44. 항공기의 중량에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 자체중량(empty weight)은 기체구조, 엔진, 고정 장비 및 내부 장비 등의 중량이다.",
+          "② 운항중량(operating weight)은 승무원, 엔진의 윤활유, 여객 서비스용품, 식음료 등의 중량이다.",
+          "③ 유상중량(payload)은 항공기에 탑재한 유상 여객, 화물, 우편물 등의 중량이다.",
+          "④ 착륙중량(landing weight)은 이륙중량에서 비행 중에 소비된 식음료 중량을 뺀 중량이다.",
+          "⑤ 이륙중량(take-off weight)은 항공기가 이륙할 때 총중량으로 최대이륙중량을 초과할 수 없다."
+        ],
+        "correctChoiceIndex": 3,
+        "answerText": "④번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-45",
+        "questionNumber": "45",
+        "title": "45. 운송의 장소적 효용에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 운송은 생산과 소비의 기능을 유기적으로 분담하는 것을 촉진한다.",
+          "② 운송은 원격지 간 생산과 판매를 촉진하여 유통의 범위와 기능을 확대한다.",
+          "③ 운송은 지역 간 유통을 활성화시켜 재화의 가격조정과 안정을 도모한다.",
+          "④ 운송은 자원과 자본을 효율적으로 배분하고 회전율을 제고한다.",
+          "⑤ 운송은 재화의 일시적 보관기능을 수행한다."
+        ],
+        "correctChoiceIndex": 4,
+        "answerText": "⑤번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-46",
+        "questionNumber": "46",
+        "title": "46. 화물자동차 운수사업에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 화물자동차 운송사업은 일반화물자동차 운송사업, 특수화물자동차 운송사업, 용달화물자동차 운송사업으로 구분된다.",
+          "② 화물자동차 운수사업이란 화물자동차 운송사업, 화물자동차 운송주선사업 및 화물자동차 운송가맹사업을 말한다.",
+          "③ 화물자동차 운송사업은 트럭 1대만으로 허가기준을 충족하기 때문에 소규모로 운영이 가능하다.",
+          "④ 화물자동차 운송주선사업은 다른 사람의 요구에 응하여 유상으로 화물운송계약을 중개 대리하거나 화물자동차 운송사업 또는 화물자동차 운송가맹사업을 경영하는 자의 화물 운송수단을 이용하여 자기 명의와 계산으로 화물을 운송하는 사업을 말한다.",
+          "⑤ 화물자동차 운송가맹사업의 허가기준 대수는 500대 이상(운송가맹점이 소유하는 화물자동차 대수를 포함하되, 8개 이상의 시·도에 각각 50대 이상 분포되어야 함)이다."
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-47",
+        "questionNumber": "47",
+        "title": "47. 다음은 국제택배에 관한 내용이다. ( )에 들어갈 내용을 순서대로 나열한 것은?<div class='text-sm text-left mt-2 ml-2'>○「항공사업법」상 ( )이란 타인의 수요에 맞추어 유상으로 「우편법」 제1조의2제7호 단서에 해당하는 수출입 등에 관한 서류와 그에 딸린 견본품을 항공기를 이용하여 송달하는 사업을 말한다.<br>○ 관세법령상 과세가격이 미화 ( )달러 이하인 물품으로서 견품으로 사용될 것으로 인정되는 물품은 관세가 면제된다.</div>",
+        "choices": [
+          "① 상업서류송달업, 200",
+          "② 상업서류송달업, 250",
+          "③ 상업서류송달업, 300",
+          "④ 국제특송업, 250",
+          "⑤ 국제특송업, 300"
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-48",
+        "questionNumber": "48",
+        "title": "48. 우리나라 운송사업의 실태에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 공로운송업체는 영세한 소형업체가 많다.",
+          "② 철도운송에 비해 육상운송이 발달되어 있다.",
+          "③ 복합운송의 발달로 컨테이너 연안운송이 활발히 이루어지고 있다.",
+          "④ 파렛트 보급 확대로 하역(상차 및 하차 포함)의 효율화가 진전되고 있다.",
+          "⑤ 전체 물류비 중 화물운송비가 가장 높은 비중을 차지하고 있다."
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-49",
+        "questionNumber": "49",
+        "title": "49. 북서코너법(north-west corner method)과 보겔추정법(Vogel's approximation method)을 적용하여 총운송비용을 구할 때 각각의 방식에 따라 산출된 총운송비용의 차이는? (단, 공급지에서 수요지까지의 톤당 운송비는 각 셀의 우측 상단에 제시되어 있음)<div class='text-sm text-left mt-2 ml-2'>(단위: 천원, 톤)</div><div class='text-sm text-left mt-2 ml-2'><table class='question-table'><thead><tr><th>수요지<br>공급지</th><th>A</th><th>B</th><th>C</th><th>공급량</th></tr></thead><tbody><tr><td>X</td><td>20</td><td>7</td><td>15</td><td>100</td></tr><tr><td>Y</td><td>42</td><td>13</td><td>28</td><td>150</td></tr><tr><td>Z</td><td>4</td><td>11</td><td>17</td><td>200</td></tr><tr><td>수요량</td><td>120</td><td>170</td><td>160</td><td>450</td></tr></tbody></table></div>",
+        "choices": [
+          "① 1,190,000원",
+          "② 1,370,000원",
+          "③ 2,560,000원",
+          "④ 2,830,000원",
+          "⑤ 2,920,000원"
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-50",
+        "questionNumber": "50",
+        "title": "50. 철도운송의 특징으로 옳지 않은 것은?",
+        "choices": [
+          "① 운송 서비스의 완결성을 지니고 있다.",
+          "② 계획운행이 가능하다.",
+          "③ 장거리 운송과 대량화물의 운송에 적합하다.",
+          "④ 안전도가 높고 친환경적인 운송수단이다.",
+          "⑤ 전국적인 네트워크를 보유하고 있다."
+        ],
+        "correctChoiceIndex": 0,
+        "answerText": "①번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-51",
+        "questionNumber": "51",
+        "title": "51. 「철도사업법」 및 「철도산업발전기본법」상 용어에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 사업용철도란 다른 사람의 수요에 따른 영업을 목적으로 하지 아니하고 자신의 수요에 따라 특수목적을 수행하기 위하여 설치하거나 운영하는 철도를 말한다.",
+          "② 철도사업이란 다른 사람의 수요에 응하여 철도차량을 사용하여 유상으로 여객이나 화물을 운송하는 사업을 말한다.",
+          "③ 철도운수종사자란 철도운송과 관련하여 승무 및 역무서비스를 제공하는 직원을 말한다.",
+          "④ 철도사업자란 한국철도공사 및 철도사업 면허를 받은 자를 말한다.",
+          "⑤ 선로란 철도차량을 운행하기 위한 궤도와 이를 받치는 노반 또는 공작물로 구성된 시설을 말한다."
+        ],
+        "correctChoiceIndex": 0,
+        "answerText": "①번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-52",
+        "questionNumber": "52",
+        "title": "52. 다음은 「선박법」에 의한 소형선박의 정의이다. ( )에 알맞은 숫자를 순서대로 나열한 것은?<div class='text-sm text-left mt-2 ml-2'>「선박법」에서 “소형선박\"이란 다음 각 호의 어느 하나에 해당하는 선박을 말한다.<br>1. 총톤수 ( )톤 미만인 기선 및 범선<br>2. 총톤수 ( )톤 미만인 부선</div>",
+        "choices": [
+          "① 20, 50",
+          "② 20, 100",
+          "③ 20, 200",
+          "④ 40, 100",
+          "⑤ 40, 200"
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-53",
+        "questionNumber": "53",
+        "title": "53. 450 kg의 화물을 한국 인천에서 미국 시카고까지 항공운송하려 한다. 이 때 부과되는 항공 운임은?<div class='text-sm text-left mt-2 ml-2'>○ 500 kg 미만의 요율은 kg당 4,000원<br>○ 500 kg 이상의 요율은 kg당 3,500원</div>",
+        "choices": [
+          "① 1,575,000원",
+          "② 1,687,500원",
+          "③ 1,750,000원",
+          "④ 1,800,000원",
+          "⑤ 2,000,000원"
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-54",
+        "questionNumber": "54",
+        "title": "54. 운송시장의 환경변화에 해당하지 않는 것은?",
+        "choices": [
+          "① 화주의 요구가 고도화 다양화되고 있다.",
+          "② 보안 및 환경관련 규제가 완화되고 있다.",
+          "③ 운송화물이 다품종 소량화되고 있다.",
+          "④ 운송시장의 경쟁이 심화되고 있다.",
+          "⑤ 전자상거래가 증가하고 있다."
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-55",
+        "questionNumber": "55",
+        "title": "55. 다음과 같은 조건에서 공로와 철도운송의 경제효용거리 분기점은?<div class='text-sm text-left mt-2 ml-2'>○ 톤당 추가되는 비용(철도역 상·하차 비용, 포장비 등): 12,000원<br>○ 공로운송의 톤 km당 운송비: 120원<br>○ 철도운송의 톤 km당 운송비: 70원</div>",
+        "choices": [
+          "① 200 km",
+          "② 220 km",
+          "③ 240 km",
+          "④ 260 km",
+          "⑤ 280 km"
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-56",
+        "questionNumber": "56",
+        "title": "56. 외현 상부의 모양이 상갑판 부근에서 안쪽으로 굽어진 정도를 지칭하는 용어는?",
+        "choices": [
+          "① 텀블 홈(tumble home)",
+          "② 현호(sheer)",
+          "③ 플레어(flare)",
+          "④ 캠버(camber)",
+          "⑤ 선저경사(rise of floor)"
+        ],
+        "correctChoiceIndex": 0,
+        "answerText": "①번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-57",
+        "questionNumber": "57",
+        "title": "57. 다음 네트워크에서 7지점의 물류 창고를 모두 연결하는 도로를 개설하려 한다. 최소로 필요한 도로 연장은? (단, 각 구간별 숫자는 거리(km)를 나타냄) [그림은 PDF 원본 참조: Page 17]",
+        "choices": [
+          "① 120 km",
+          "② 130 km",
+          "③ 140 km",
+          "④ 150 km",
+          "⑤ 160 km"
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-58",
+        "questionNumber": "58",
+        "title": "58. 택배표준약관(공정거래위원회 표준약관 제10026호)의 내용에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 운송물이 포장당 50만원을 초과하거나 운송상 특별한 주의를 요하는 것일 때에는 사업자는 할증요금을 청구할 수 있다.",
+          "② 사업자는 운송물 1포장의 가액이 300만원을 초과하는 경우 운송물의 수탁을 거절할 수 있다.",
+          "③ 고객이 운송장에 운송물의 가액을 기재하지 않은 경우 사업자의 손해배상한도액은 50만원으로 하되, 운송물의 가액에 따라 할증요금을 지급하는 경우의 손해배상한도액은 각 운송가액 구간별 운송물의 최고가액으로 한다.",
+          "④ 운송물의 일부 멸실 또는 훼손에 대한 사업자의 손해배상책임은 수하인이 운송물을 수령한 날로부터 21일 이내에 그 일부 멸실 또는 훼손에 대한 사실을 사업자에게 통지를 발송하지 아니하면 소멸한다.",
+          "⑤ 운송장에 인도예정일의 기재가 없는 도서 및 산간벽지의 경우 운송장에 기재된 운송물 수탁일로부터 3일 이내에 운송물을 인도한다."
+        ],
+        "correctChoiceIndex": 3,
+        "answerText": "④번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-59",
+        "questionNumber": "59",
+        "title": "59. 배송센터 L로부터 모든 수요지점 1~6까지의 최단 경로 네트워크를 구성하였을 때, 구성된 네트워크의 전체 거리는? (단, 각 구간별 숫자는 거리(km)를 나타냄) [그림은 PDF 원본 참조: Page 18]",
+        "choices": [
+          "① 11 km",
+          "② 12 km",
+          "③ 13 km",
+          "④ 14 km",
+          "⑤ 15 km"
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-60",
+        "questionNumber": "60",
+        "title": "60. 수송수요모형에 관한 설명으로 옳은 것은?",
+        "choices": [
+          "① 화물발생 모형 중에는 원단위법, 성장률법, 성장인자법이 있다.",
+          "② 화물분포 모형 중에는 중력모형과 로짓모형이 있다.",
+          "③ 수단분담 모형 중에는 통행단모형과 엔트로피극대화모형이 있다.",
+          "④ 통행배정 모형 중에는 반복배정법과 분할배정법이 있다.",
+          "⑤ 교통망 평형배정법은 용량비제약모형이다."
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-61",
+        "questionNumber": "61",
+        "title": "61. 우리나라 연안해운의 활성화 방안에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 선사와 화주 간 지속적인 관계 개선 및 서비스 향상을 통한 진정한 의미의 장기 용선계약 체결이 필요하다.",
+          "② 연안 선사를 위한 실효성 있는 선박금융기법 개발을 통해 연안 선사의 경영합리화 추진이 필요하다.",
+          "③ 연안 해운은 육상운송수단에 비해 친환경적인 운송수단으로 세제상의 지원이 필요하다.",
+          "④ 현행 연안운송사업의 등록기준은 선박 3척 이상으로 규정되어 있어 등록 기준의 완화가 필요하다.",
+          "⑤ 선복량 과잉을 방지하고 적정 선박량의 유지를 위한 방안이 필요하다."
+        ],
+        "correctChoiceIndex": 3,
+        "answerText": "④번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-62",
+        "questionNumber": "62",
+        "title": "62. 열차페리 운송방식은 해상운송과 철도운송이 가지는 장점을 효과적으로 접목시킨 복합일관운송 방식이다. 열차페리 운송의 장점으로 옳지 않은 것은?",
+        "choices": [
+          "① 하역처리의 빈도가 감소된다.",
+          "② 포장의 간이화에 따른 비용이 절감된다.",
+          "③ 손해발생시 책임소재가 명확하다.",
+          "④ 항만하역시간의 단축이 가능하다.",
+          "⑤ 파손위험의 발생이 저하된다."
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-63",
+        "questionNumber": "63",
+        "title": "63. A 플랜트에서 B 지점까지 파이프라인을 통하여 가스를 보내려 한다. 보낼 수 있는 최대 가스량은? (단, 각 구간별 숫자는 파이프라인의 용량을 톤으로 나타냄) [그림은 PDF 원본 참조: Page 19]",
+        "choices": [
+          "① 9톤",
+          "② 10톤",
+          "③ 11톤",
+          "④ 12톤",
+          "⑤ 13톤"
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-64",
+        "questionNumber": "64",
+        "title": "64. 항공화물 운송에 필요한 지상조업장비의 하나로 적재작업이 완료된 항공화물의 단위탑재용기를 터미널에서 항공기까지 견인차에 연결하여 수평 이동하는 장비는?",
+        "choices": [
+          "① 하이 로더(high loader)",
+          "② 포크리프트 트럭(forklift truck)",
+          "③ 트랜스포터(transporter)",
+          "④ 달리(dolly)",
+          "⑤ 셀프 프로펠드 컨베이어(self propelled conveyor)"
+        ],
+        "correctChoiceIndex": 3,
+        "answerText": "④번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-65",
+        "questionNumber": "65",
+        "title": "65. 철도화물을 운송할 경우 화차취급 운송에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 화물을 대절한 화차단위로 운송한다.",
+          "② 운임은 화차를 기준으로 정하여 부과한다.",
+          "③ 일반화물의 단거리 운송에 많이 이용한다.",
+          "④ 발·착역에서의 양 하역작업은 화주책임이다.",
+          "⑤ 특대화물, 위험물 등의 경우에는 할증제도가 있다."
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-66",
+        "questionNumber": "66",
+        "title": "66. 화물자동차의 운송원가 계산은 운송특성에 맞는 합리적 기준을 설정하고 그 기준에 따른 표준원가를 계산하여야 한다. 운송원가 계산에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 고정비는 화물자동차의 운송거리 등과 관계없이 일정하게 발생하는 비용을 말한다.",
+          "② 변동비용은 운송거리, 영차거리, 운송 및 적재량 등에 따라 변동되는 원가를 말한다.",
+          "③ 고정비 대상항목으로는 감가상각비, 세금과 공과금, 인건비 등이 있다.",
+          "④ 변동비는 운전기사의 운전기량에 따라 차이가 발생할 수 있다.",
+          "⑤ 변동비 대상항목으로는 연료비, 광열수도료, 복리후생비 등이 있다."
+        ],
+        "correctChoiceIndex": 4,
+        "answerText": "⑤번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-67",
+        "questionNumber": "67",
+        "title": "67. 수출되는 FCL 화물의 해상운송 업무와 관련하여 필요한 서류들을 업무흐름의 순서대로 나열한 것은?<div class='text-sm text-left mt-2 ml-2'><table class='choices-table'><tbody><tr><td>ㄱ. 선하증권</td><td>ㄴ. 기기수령증</td><td>ㄷ. 선적요청서</td></tr><tr><td>ㄹ. 본선수취증</td><td>ㅁ. 부두수취증</td><td></td></tr></tbody></table></div>",
+        "choices": [
+          "① ㄴ-ㄷ-ㅁ-ㄹ-ㄱ",
+          "② ㄴ-ㄷ-ㄹ-ㄱ-ㅁ",
+          "③ ㅁ-ㄷ-ㄴ-ㄱ-ㄹ",
+          "④ ㄷ-ㄴ-ㅁ-ㄹ-ㄱ",
+          "⑤ ㄷ-ㄴ-ㄹ-ㅁ-ㄱ"
+        ],
+        "correctChoiceIndex": 0,
+        "answerText": "①번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-68",
+        "questionNumber": "68",
+        "title": "68. 화물자동차운송정보시스템에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① ITS는 도로와 차량, 사람과 화물을 정보네트워크로 연결하여 교통체증의 완화와 교통사고의 감소, 환경문제의 개선 등을 실현할 수 있는 시스템이다.",
+          "② GIS-T는 디지털 지도에 각종 정보를 연결하여 관리하고 이를 분석, 응용하는 시스템의 통칭이다.",
+          "③ AVLS는 위성으로부터 받은 신호로 이동체의 위치 및 이동상태를 파악하여차량의 최적 배치 및 파견, 실태파악 및 분석 안내, 통제, 운영할 수 있는 작업들을 지능화한 시스템이다.",
+          "④ TRS는 중계국에 할당된 다수의 주파수 채널을 여러 사용자들이 공유하여 사용하는 무선통신서비스이다.",
+          "⑤ VTS는 화물자동차의 최종 배송지에 대한 최적 운송경로를 검색하는 운송경로시스템이다."
+        ],
+        "correctChoiceIndex": 4,
+        "answerText": "⑤번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-69",
+        "questionNumber": "69",
+        "title": "69. 화물자동차의 제원에 관한 설명으로 옳은 것은?",
+        "choices": [
+          "① 최대적재량은 실질적으로 적재운행할 수 있는 화물의 총량으로 도로법령상 적재 가능한 축하중 10톤과는 직접관계가 없다.",
+          "② 공차중량은 연료, 냉각수, 윤활유 등을 제외한 운행에 필요한 장비를 갖춘 상태의 중량을 말한다.",
+          "③ 차량 총중량은 승차정원을 제외한 화물 최대적재량 적재시의 자동차 전체중량이다.",
+          "④ 축하중은 차륜이 지나는 접지 면에 걸리는 전체 차축하중의 합이다.",
+          "⑤ 승차정원은 운전자를 제외한 승차 가능한 최대인원수를 말한다."
+        ],
+        "correctChoiceIndex": 0,
+        "answerText": "①번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-70",
+        "questionNumber": "70",
+        "title": "70. 다음 그림은 5개 지점을 연결하는 도로망이다. 어느 특정 상품에 대한 각 지점의 수요량은 각각 A지점 20톤, B지점 25톤, C지점 15톤, D지점 10톤, E지점 30톤이다. 수요량 가중치를 고려한 평균 운송거리를 최소화하는 위치에 배송센터를 설치하고자 할 때 최적 위치는? (단, 어느 지점에 배송센터를 설치할 경우 배송센터로부터 그 지점까지의 운송거리는 0으로 가정하고, 각 구간별 숫자는 거리(km)를 나타냄) [그림은 PDF 원본 참조: Page 21]",
+        "choices": [
+          "① A",
+          "② B",
+          "③ C",
+          "④ D",
+          "⑤ E"
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-71",
+        "questionNumber": "71",
+        "title": "71. 운송시스템의 합리화를 위하여 검토해야 할 사항으로 옳지 않은 것은?",
+        "choices": [
+          "① 트럭의 적재율을 향상시킨다.",
+          "② 공차율 극소화를 위하여 차량의 배송빈도를 높인다.",
+          "③ 최적 운송수단을 선택한다.",
+          "④ 최단 운송루트를 개발한다.",
+          "⑤ 물류기기를 개선하고 정보시스템을 정비한다."
+        ],
+        "correctChoiceIndex": 1,
+        "answerText": "②번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-72",
+        "questionNumber": "72",
+        "title": "72. 다음은 운임에 따른 운송수요의 탄력성을 나타내는 수식이다. 수식에 들어갈 각 항목을 순서대로 나열한 것은?<div class='text-sm text-left mt-2 ml-2'>탄력성 = (A/B) / (C/D)</div>",
+        "choices": [
+          "① A: 수요변화폭, B: 수요수준, C: 운임변화폭, D: 운임수준",
+          "② A: 수요수준, B: 수요변화폭, C: 운임수준, D: 운임변화폭",
+          "③ A: 운임변화폭, B: 운임수준, C: 수요수준, D: 수요변화폭",
+          "④ A: 운임수준, B: 운임변화폭, C: 수요수준, D: 수요변화폭",
+          "⑤ A: 운임변화폭, B: 운임수준, C: 수요변화폭, D: 수요수준"
+        ],
+        "correctChoiceIndex": 0,
+        "answerText": "①번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-73",
+        "questionNumber": "73",
+        "title": "73. 트레일러의 형상에 따른 설명으로 옳은 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 평상식 트레일러(flat bed trailer)는 하대의 상면이 평면으로 된 트레일러로 일반화물 및 강재 등의 운송에 적합하다.<br>ㄴ. 밴형 트레일러(van trailer)는 하대 부분에 밴형의 보디가 장치된 트레일러로 일반잡화 및 냉동화물 등의 화물운송에 주로 이용한다.<br>ㄷ. 오픈탑 트레일러(open top trailer)는 밴형 트레일러의 일종으로 천장이 개구된 형태이며 주로 석탄 및 철광석 등과 같은 화물에 포장을 덮어 운송하는 경우 이용한다.<br>ㄹ. 스케레탈 트레일러(skeletal trailer)는 컨테이너운송을 위해 제작된 트레일러로 전후단에 컨테이너 고정장치가 부착되어 있으며, 20'용, 40'용 등 여러 종류가 있다.<br>ㅁ. 중저상식 트레일러(drop bed trailer)는 하대의 중앙부위가 낮게 설계된 트레일러로 중량화물 등의 운송에 주로 이용한다.</div>",
+        "choices": [
+          "① ㄱ, ㄷ, ㅁ",
+          "② ㄴ, ㄷ",
+          "③ ㄴ, ㅁ",
+          "④ ㄱ, ㄷ, ㅁ",
+          "⑤ ㄱ, ㄴ, ㄷ, ㄹ, ㅁ"
+        ],
+        "correctChoiceIndex": 4,
+        "answerText": "⑤번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-74",
+        "questionNumber": "74",
+        "title": "74. 해상운송시 위험화물의 운송에 관한 설명으로 옳은 것은?",
+        "choices": [
+          "① IMDG 코드에서 위험물이라는 용어에는 이전의 위험화물을 담았던 세정되지 아니한 빈 포장용기는 포함되지 않는다.",
+          "② 위험물 선적 서류에 요구되는 위험물 명세정보에는 UN 번호, 품명, 급 및 등급, 포장 등급이 포함된다.",
+          "③ IMDG 코드에는 위험물을 여러 등급으로 구분하고 있는데 1급(class 1)은 인화성 액체류이다.",
+          "④ PSN(proper shipping name)은 위험물 운송 전문가 위원회가 위험물에 부여한 고유 번호이다.",
+          "⑤ IMDG 코드에 별도의 명문 규정이 없는 한 위험물이 충전된 모든 포장화물에는 그 화물의 위험성을 나타내는 표찰을 부착하지 않아도 된다."
+        ],
+        "correctChoiceIndex": 4,
+        "answerText": "⑤번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-75",
+        "questionNumber": "75",
+        "title": "75. 공로 운송의 운영관리지표에 관한 설명으로 옳은 것은?",
+        "choices": [
+          "① 가동율은 일정기간 동안 화물차량을 실제 운행한 시간과 목표운행 시간과의 비율을 의미하는 지표로 목표가동일수를 실제가동일수로 나누어 산출한다.",
+          "② 회전율은 화물차량이 일정시간 내에 화물을 운송한 횟수를 말하는 지표로 평균 적재량을 총운송량으로 나누어 산출한다.",
+          "③ 영차율은 전체 화물운송거리 중에서 실제로 얼마나 화물을 적재하고 운행했는지를 나타내는 지표로 적재거리를 총운행거리로 나누어 산출한다.",
+          "④ 복화율은 편도운송을 한 후 귀로에 복화운송을 어느 정도 수행했느냐를 나타내는 지표로 편도운행횟수를 귀로시 영차운행횟수로 나누어 산출한다.",
+          "⑤ 적재율은 화물자동차의 적재량 대비 실제 얼마나 화물을 적재하고 운행했는지를 나타내는 지표로 총운행적재율은 차량적재정량을 총운송량으로 나누어 산출한다."
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-76",
+        "questionNumber": "76",
+        "title": "76. 보세구역의 형태와 운영에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 세관검사장은 통관하려는 물품을 검사하기 위한 장소로서 세관장이 지정하는 지역으로 한다.",
+          "② 보세창고에는 외국물품이나 통관을 하려는 물품을 장치한다.",
+          "③ 보세전시장에서는 박람회, 전람회, 견본품 전시회 등의 운영을 위하여 외국물품을 장치·전시하거나 사용할 수 있다.",
+          "④ 세관장은 보세판매장에서 판매할 수 있는 물품의 종류, 수량, 장치 장소 등을 제한할 수 있다.",
+          "⑤ 세관장은 직권으로 또는 관계 중앙행정기관의 장이나 지방자치단체의 장, 그 밖에 종합보세구역을 운영하려는 자의 요청에 따라 무역진흥에의 기여 정도, 외국물품의 반입 반출 물량 등을 고려하여 일정한 지역을 종합보세구역으로 지정할 수 있다."
+        ],
+        "correctChoiceIndex": 4,
+        "answerText": "⑤번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-77",
+        "questionNumber": "77",
+        "title": "77. 한국 부산의 A 마트는 베트남 호치민의 B, C, D 업체로부터 매월 식품 및 식자재 약 30 CBM을 컨테이너로 수입하고 있다. 이 때 혼재방식과 운송형태가 바르게 짝지어진 것은?",
+        "choices": [
+          "① Buyer's consolidation, CY - CFS",
+          "② Seller's consolidation, CY-CFS",
+          "③ Buyer's consolidation, CFS - CY",
+          "④ Seller's consolidation, CFS - CFS",
+          "⑤ Co-loading, CY - CY"
+        ],
+        "correctChoiceIndex": 2,
+        "answerText": "③번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-78",
+        "questionNumber": "78",
+        "title": "78. 수송 문제를 해결하기 위하여 최소비용법 (least-cost method)을 적용하고자 한다. 아래와 같은 운송조건 하에서 최소비용법을 적용할 때 첫번째 운송구간 할당 후, 두번째로 할당되는 운송구간과 할당량을 순서대로 나열한 것은? (단, 공급지에서 수요지까지의 운송비는 각 셀의 우측 상단에 제시되어 있음)<div class='text-sm text-left mt-2 ml-2'>(단위: 천원, 톤)</div><div class='text-sm text-left mt-2 ml-2'><table class='question-table'><thead><tr><th>수요지<br>공급지</th><th>1</th><th>2</th><th>3</th><th>공급량</th></tr></thead><tbody><tr><td>A</td><td>4</td><td>3</td><td>5</td><td>20</td></tr><tr><td>B</td><td>7</td><td>6</td><td>9</td><td>50</td></tr><tr><td>C</td><td>8</td><td>5</td><td>10</td><td>30</td></tr><tr><td>수요량</td><td>35</td><td>20</td><td>45</td><td>100</td></tr></tbody></table></div>",
+        "choices": [
+          "① A-1, 20톤",
+          "② B-1, 35톤",
+          "③ B-2, 20톤",
+          "④ C-1, 30톤",
+          "⑤ C-2, 20톤"
+        ],
+        "correctChoiceIndex": 4,
+        "answerText": "⑤번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-79",
+        "questionNumber": "79",
+        "title": "79. 택배의 특성에 관한 설명으로 옳은 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 개인화물부터 기업화물까지 불특정다수의 화물을 대상으로 한다.<br>ㄴ. 물류기지, 집배차량, 자동분류기 등 대규모 투자가 필요하지 않다.<br>ㄷ. 운송인은 일관된 책임운송서비스를 제공한다.<br>ㄹ. 개별화물의 전산관리, 화물추적, 집배차량과의 통신 등이 접목되는 사업이다.<br>ㅁ. 집하와 배송이 별개로 수행되는 운송사업이다.<br>ㅂ. 택배사업은 매출액에 비해서 많은 노동력이 소요되는 사업이다.</div>",
+        "choices": [
+          "① ㄱ, ㄷ, ㄹ",
+          "② ㄱ, ㄹ, ㅂ",
+          "③ ㄴ, ㄷ, ㅂ",
+          "④ ㄱ, ㄷ, ㄹ, ㅂ",
+          "⑤ ㄱ, ㄷ, ㄹ, ㅁ, ㅂ"
+        ],
+        "correctChoiceIndex": 3,
+        "answerText": "④번",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "cargo_transport-2017-80",
+        "questionNumber": "80",
+        "title": "80. 다음은 운송수단의 속도와 비용과의 관계를 설명한 것이다. ( )에 들어갈 내용을 순서대로 나열한 것은?<div class='text-sm text-left mt-2 ml-2'>○ 속도가 (ㄱ) 운송수단일수록 운송빈도가 더욱 높아져 (ㄴ)가 증가한다.<br>○ 속도가 (ㄷ) 운송수단일수록 운송빈도가 더욱 낮아져 (ㄹ)가 증가한다.</div>",
+        "choices": [
+          "① ㄱ: 느린, ㄴ: 운송비, ㄷ: 느린, ㄹ: 보관비",
+          "② ㄱ: 느린, ㄴ: 보관비, ㄷ: 빠른, ㄹ: 운송비",
+          "③ ㄱ: 느린, ㄴ: 운송비, ㄷ: 빠른, ㄹ: 보관비",
+          "④ ㄱ: 빠른, ㄴ: 운송비, ㄷ: 느린, ㄹ: 보관비",
+          "⑤ ㄱ: 빠른, ㄴ: 보관비, ㄷ: 느린, ㄹ: 운송비"
+        ],
+        "correctChoiceIndex": 3,
+        "answerText": "④번",
+        "explanation": "",
+        "purpose": ""
+      }
+    ]
+  }
+}
