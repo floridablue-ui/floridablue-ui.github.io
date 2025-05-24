@@ -1,0 +1,646 @@
+{
+  "storage_stevedoring": {
+    "2017": [
+      {
+        "id": "storage_stevedoring-2017-1",
+        "questionNumber": "1",
+        "title": "1. 보관의 기능이 아닌 것은?",
+        "choices": [
+          "① 생산과 소비의 시간적 거리 조정",
+          "② 운반 활성화 지수의 최소화",
+          "③ 제품의 집산, 분류, 조합",
+          "④ 세금 지불 연기 등의 금융 역할",
+          "⑤ 구매와 생산의 완충"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-2",
+        "questionNumber": "2",
+        "title": "2. 보관의 원칙에 관한 설명으로 옳지 않은 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 네트워크보관의 원칙: 관련 품목을 한 장소에 모아서 계통적으로 분리하고 보관하여 출하의 효율성을 증대시키는 원칙을 말한다.<br>ㄴ. 회전대응보관의 원칙: 입출고 빈도의 정도에 따라 제품의 보관 장소를 결정하는 것으로 입출고 빈도가 낮은 제품을 출입구에서 가까운 장소에 보관하는 원칙을 말한다.<br>ㄷ. 동일성ㆍ유사성의 원칙: 제품의 입출고를 용이하게 하고 효율적으로 보관하기 위해 통로 면에 보관하여 작업의 접근성을 강조하는 원칙을 말한다.<br>ㄹ. 위치표시의 원칙: 보관품의 장소, 선반 번호 등의 위치를 표시하여 입출고 업무를 효율화시키는 원칙을 말한다.<br>ㅁ. 선입선출의 원칙: 형상의 특성에 따라 보관 방법을 변경하는 것으로 보관 시 파손이나 분실이 생기기 쉬운 제품에 적용되는 원칙을 말한다.</div>",
+        "choices": [
+          "① ㄱ, ㄴ, ㄹ",
+          "② ㄱ, ㄴ, ㅁ",
+          "③ ㄱ, ㄷ, ㄹ",
+          "④ ㄴ, ㄷ, ㅁ",
+          "⑤ ㄴ, ㄹ, ㅁ"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-3",
+        "questionNumber": "3",
+        "title": "3. 다음의 설명에 해당되는 물류시설은?<div class='text-sm text-left mt-2 ml-2'>○ 재고품의 임시보관거점으로 상품의 배송거점인 동시에 예상 수요에 대한 보관거점이다.<br>○ 대도시, 지방중소도시에 합리적인 배송을 실시할 목적으로 운영되는 유통의 중계기지이다.<br>○ 일종의 하치장으로 제조업체들은 원료, 완성품, 폐기물들을 쌓아두는 경우가 많다.</div>",
+        "choices": [
+          "① 데포(Depot)",
+          "② 물류센터",
+          "③ 복합화물터미널",
+          "④ 스톡 포인트(Stock Point)",
+          "⑤ CFS(Container Freight Station)"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-4",
+        "questionNumber": "4",
+        "title": "4. 내륙 컨테이너기지(ICD; Inland Container Depot)에 관한 내용으로 옳은 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 수출입 통관업무, 집하 및 분류 기능을 수행한다.<br>ㄴ. 마샬링(Marshalling)기능, 본선 선적 및 양화 작업을 수행한다.<br>ㄷ. 선사, 트럭회사, 관세사, 포장회사, 포워더(Forwarder) 등을 유치하여 운영하므로 내륙 항만이라고 부른다.<br>ㄹ. 노동력의 안정적 확보와 자동화를 통한 생산성 향상이 필요하다.<br>ㅁ. 항만 또는 공항이 아닌 내륙시설이라 공적 권한을 가지지 못한다.</div>",
+        "choices": [
+          "① ㄱ, ㄴ, ㄹ",
+          "② ㄱ, ㄴ, ㅁ",
+          "③ ㄱ, ㄷ, ㄹ",
+          "④ ㄴ, ㄷ, ㅁ",
+          "⑤ ㄴ, ㄹ, ㅁ"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-5",
+        "questionNumber": "5",
+        "title": "5. 다음은 작년 K사 물류거점시설의 제품별 주요 물류비 배분 내역이며 총 물류비는 50,000천원이었다. 제품 C의 물류비는?<div class='text-sm text-left mt-2 ml-2'><table class='question-table'><thead><tr><th>구분</th><th>물류정보/관리비</th><th>보관 및<br>재고관리비</th><th>운송비</th><th>합계</th></tr></thead><tbody><tr><td>발생 비용</td><td>5,000천원</td><td>15,000천원</td><td>30,000천원</td><td>50,000천원</td></tr><tr><td>배분 기준</td><td>출하횟수</td><td>보관면적</td><td>배송횟수</td><td></td></tr><tr><td>A 제품</td><td>15,000 회</td><td>350,000 m²</td><td>5,000 회</td><td></td></tr><tr><td>B 제품</td><td>9,000 회</td><td>210,000 m²</td><td>3,000 회</td><td></td></tr><tr><td>C 제품</td><td>6,000 회</td><td>140,000 m²</td><td>2,000 회</td><td></td></tr><tr><td>합계</td><td>30,000 회</td><td>700,000 m²</td><td>10,000 회</td><td></td></tr></tbody></table></div>",
+        "choices": [
+          "① 10,000천원",
+          "② 13,500천원",
+          "③ 15,000천원",
+          "④ 20,000천원",
+          "⑤ 25,000천원"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-6",
+        "questionNumber": "6",
+        "title": "6. 크로스도킹 (Cross Docking)에 관한 내용으로 옳은 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 수요가 일정하고 안정적이며, 재고품절비용이 낮을 경우 효율적으로 운영될 수 있다.<br>ㄴ. 대량고객화(Mass Customization) 전략과 연계하여 서비스 차별화를 도모한다.<br>ㄷ. 물류센터로 입고되는 상품을 보관 대신 즉시 배송할 준비를 목적으로 하는 시스템이다.<br>ㄹ. POS(Point of Sale) 시스템 등 다양한 정보시스템, 대규모 물류센터, 자체 트럭수송단을 운영한다.<br>ㅁ. 물류센터의 회전율 감소, 재고 수준 증대, 리드 타임 감소 등의 효과가 있다.</div>",
+        "choices": [
+          "① ㄱ, ㄴ, ㄹ",
+          "② ㄱ, ㄴ, ㅁ",
+          "③ ㄱ, ㄷ, ㄹ",
+          "④ ㄴ, ㄷ, ㅁ",
+          "⑤ ㄴ, ㄹ, ㅁ"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-7",
+        "questionNumber": "7",
+        "title": "7. 일반적인 물류센터의 작업 공정 순서는?",
+        "choices": [
+          "① 입하 → 피킹 → 검품 → 보관 → 격납→ 포장→ 출하",
+          "② 입하 → 피킹 → 보관→ 격납→ 검품 → 포장→ 출하",
+          "③ 입하 → 격납→ 보관→ 피킹 → 검품 → 포장→ 출하",
+          "④ 입하 → 격납→ 포장 → 보관→ 피킹→ 검품 → 출하",
+          "⑤ 입하 → 포장→ 격납→ 보관→ 피킹→ 검품 → 출하"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-8",
+        "questionNumber": "8",
+        "title": "8. 물류센터의 설계 특성별 고려사항으로 옳은 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 운영 특성: 지리적 위치, 입지 제약, 인구 등<br>ㄴ. 주문 특성: 주문건수, 주문빈도, 주문의 크기 등<br>ㄷ. 제품 특성: 크기, 무게, 가격 등<br>ㄹ. 환경 특성: 입고 방법, 보관 방법, 피킹 방법 등<br>ㅁ. 설비 특성: 자동화 수준, 설비 종류 등</div>",
+        "choices": [
+          "① ㄱ, ㄴ, ㄹ",
+          "② ㄱ, ㄴ, ㅁ",
+          "③ ㄱ, ㄷ, ㄹ",
+          "④ ㄴ, ㄷ, ㅁ",
+          "⑤ ㄴ, ㄹ, ㅁ"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-9",
+        "questionNumber": "9",
+        "title": "9. 물류단지의 입지결정 방법에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 총비용 비교법: 각 대안별로 관리비용을 산출하고, 총비용이 최소가 되는 대안을 선택하는 방법이다.",
+          "② 무게중심법: 물류센터를 기준으로 고정된 공급지(공장 등)에서 물류센터까지의 수송비와 물류센터에서 수요지(배송처 등)까지의 수송비를 구하여 그 합이 최소가 되는 입지를 선택하는 방법이다.",
+          "③ 톤-킬로법: 입지에 관련된 요인(접근성, 지역환경, 노동력 등)에 주관적으로 가중치를 설정하여 각 요인의 평가점수를 합산하는 방법이다.",
+          "④ 브라운깁슨법: 입지에 영향을 주는 인자들을 필수적 요인, 객관적 요인, 주관적 요인으로 구분하여 평가하는 방법이다.",
+          "⑤ 손익분기 도표법: 일정한 물동량(입고량 또는 출고량)의 고정비와 변동비를 산출하고 그 합을 비교하여 물동량에 따른 총비용이 최소가 되는 대안을 선택하는 방법이다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-10",
+        "questionNumber": "10",
+        "title": "10. 수배송 네트워크에서 물류 거점(Node)수의 증가로 나타나는 현상이 아닌 것은?",
+        "choices": [
+          "① 재고비용은 증가한다.",
+          "② 배송리드타임은 증가한다.",
+          "③ 시설투자비용은 증가한다.",
+          "④ 관리비용은 증가한다.",
+          "⑤ 총비용은 낮아지다가 일정 수 이상이 넘으면 점차 증가한다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-11",
+        "questionNumber": "11",
+        "title": "11. K사 단일명령수행 자동창고시스템에서는 시간당 180건의 주문을 처리한다. S/R(Storage and Retrieval)기계의 운행당 평균주기시간은 1분이며 한 개의 통로만 담당하고, 각 통로는 2개의 랙을 가진다. 자동창고의 저장용량이 6,000 단위이고, 랙의 단(Tier) 수가 20일 때 저장 랙의 베이(Bay) 수는?",
+        "choices": [
+          "① 15",
+          "② 25",
+          "③ 35",
+          "④ 50",
+          "⑤ 100"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-12",
+        "questionNumber": "12",
+        "title": "12. 공급사슬 협업에 있는 A사, B사, C사가 있다. 100단위의 완성품을 C사가 도매상에게 공급하기 위해 A사가 B사에 공급해야 할 단위수량은? (단, B사와 C사는 각각 3%, 5%의 손실률을 가진다.)<div class='text-sm text-left mt-2 ml-2'>A사 ← B사 ← C사 → 도매상</div>",
+        "choices": [
+          "① 106개",
+          "② 110개",
+          "③ 116개",
+          "④ 118개",
+          "⑤ 120개"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-13",
+        "questionNumber": "13",
+        "title": "13. 자동창고시스템이 시간당 300번의 저장 및 출고 작업을 수행할 수 있다. 10개의 통로와 각 통로에는 한 대씩의 S/R(Storage and Retrieval)기계가 작업을 수행한다. 수행작업 40%는 단일명령에 의해서 수행되며 나머지는 이중명령에 의해서 수행된다. S/R기계의 평균 이용률은? (단, 단일명령수행 주기시간: 2분, 이중명령수행 주기시간: 3분)",
+        "choices": [
+          "① 65%",
+          "② 82.5%",
+          "③ 85%",
+          "④ 90%",
+          "⑤ 95%"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-14",
+        "questionNumber": "14",
+        "title": "14. 스태커 크레인(Stacker Crane)에 적합한 오더피킹(Order Picking)의 출고형태(보관단위 - 피킹단위)는?",
+        "choices": [
+          "① 파렛트-파렛트",
+          "② 파렛트-케이스",
+          "③ 케이스-케이스",
+          "④ 케이스-단품",
+          "⑤ 단품-단품"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-15",
+        "questionNumber": "15",
+        "title": "15. 자동창고시스템에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 컴퓨터 제어방식을 통해 작업의 효율성 향상 효과를 얻을 수 있다.",
+          "② 재고관리 및 선입선출에 의한 입출고 관리가 용이하다.",
+          "③ 보관능력 및 유연성 측면에서 효율성을 향상시킨다.",
+          "④ 자동창고에서 처리할 물품의 치수와 포장, 중량 등을 고려하여 설계한다.",
+          "⑤ 다양한 규격의 화물을 취급하는 영업용 창고에 적합하다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-16",
+        "questionNumber": "16",
+        "title": "16. 창고관리시스템(WMS; Warehouse Management System)의 특성에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 물품의 입하, 격납, 피킹, 출하 및 재고사이클카운트의 창고활동을 효율적으로 관리하는 시스템이다.",
+          "② RFID, 바코드시스템 및 무선자동인식시스템을 통해 물품취급을 최소화한다.",
+          "③ 재고정확도, 설비활용도, 고객서비스율이 향상된다.",
+          "④ 피킹관리, 주문진척관리 및 자동발주시스템과 같은 주문관련 기능을 수행한다.",
+          "⑤ 출고관리, 선입선출관리, 수배송 관리, 크로스도킹과 같은 출고관련 기능을 수행한다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-17",
+        "questionNumber": "17",
+        "title": "17. 디지털 피킹시스템(DPS; Digital Picking System)과 디지털 어소팅시스템(DAS; Digital Assorting System)의 특성에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① DPS는 피킹 물품을 전표 없이 피킹가능한 시스템으로 다품종 소량, 다빈도 피킹 및 분배작업에 사용된다.",
+          "② DPS는 대차식 DPS, 구동컨베이어 DPS, 자동컨베이어 DPS로 분류되며, 대차식 DPS의 초기 설치비가 가장 많이 소요된다.",
+          "③ DAS는 적은 인원으로 빠른 분배작업이 가능하여 물류비용을 절감할 수 있다.",
+          "④ 멀티 분배 DAS방식은 고객별 주문상품을 합포장하기에 적합한 분배시스템이다.",
+          "⑤ 멀티 다품종분배 DAS방식은 아이템 수가 많은 의류업 품목에 적합한 시스템이다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-18",
+        "questionNumber": "18",
+        "title": "18. 집중구매 방식과 분산구매 방식에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 집중구매 방식은 구매절차를 표준화하여 구매비용 절감에 유리하다.",
+          "② 분산구매 방식은 구매절차가 간단하고 비교적 단기간 내 구매가 가능하다.",
+          "③ 가격 차이가 없는 품목의 경우 집중구매가 유리하다.",
+          "④ 집중구매 방식은 긴급조달의 어려움이 있다.",
+          "⑤ 분산구매 방식은 사업장의 특수 요구사항을 반영하는 자율적인 구매가 가능하다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-19",
+        "questionNumber": "19",
+        "title": "19. JIT(Just In Time)에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 필요한 시간에, 필요한 장소에, 필요한 양만큼 공급하는 방식이다.",
+          "② 공급자는 제조업체의 필요한 자재 소요량을 신속하게 파악할 수 있어야 한다.",
+          "③ 공급자와 생산자간 상호 협력이 미흡할 경우 성과를 기대하기 어렵다.",
+          "④ 공급자는 안정적인 장기계약을 통해 제조기업의 한 공정처럼 협력할 수 있어야 한다.",
+          "⑤ 수요예측을 기반으로 하는 Push 방식이 효과적이다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-20",
+        "questionNumber": "20",
+        "title": "20. 자재소요량계획 (MRP; Material Requirement Planning)에서 A제품은 3개의 부품 X와 2개의 부품 Y로 구성되어 있으며 순소요량은 50개이다. 부품 X의 가용재고는 45개이며 입고예정량은 없으며, 부품 Y의 가용재고는 50개이며 15개의 입고예정량이 계획되어 있다면 부품 X, Y의 순소요량은?",
+        "choices": [
+          "① X = 105개, Y = 35개",
+          "② X = 105개, Y = 45개",
+          "③ X = 105개, Y = 105개",
+          "④ X = 150개, Y = 45개",
+          "⑤ X = 150개, Y = 105개"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-21",
+        "questionNumber": "21",
+        "title": "21. 시계열 예측기법은 수요를 평균(혹은 수평), 추세, 계절, 주기, 우연변동 등의 요소로 분해할 수 있다. 다음의 시계열 자료를 분해할 때, ㄱ~ㄹ에 적합한 내용을 순서대로 옳게 나열한 것은? [그림은 PDF 원본 참조: Page 42]",
+        "choices": [
+          "① 주기-계절적 패턴-추세-우연변동",
+          "② 추세-계절적 패턴-주기-우연변동",
+          "③ 추세-우연변동-주기-계절적 패턴",
+          "④ 주기-우연변동-추세-계절적 패턴",
+          "⑤ 계절적 패턴-주기-추세-우연변동"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-22",
+        "questionNumber": "22",
+        "title": "22. 커피머신을 구매하여 공급하는 도매상은 올해의 구매전략으로 경제적 주문량(EOQ; Economic Order Quantity) 적용을 고려하고 있다. 연간 예상판매량을 10,000대, 대당 가격은 100만원, 대당 연간 재고유지에 소요되는 비용을 구매비용의 25%, 1회 발주에 소요되는 비용이 50만원이라고 할 때 경제적 주문량과 적정 주문횟수는?",
+        "choices": [
+          "① 100대, 100회",
+          "② 200대, 50회",
+          "③ 200대, 100회",
+          "④ 400대, 25회",
+          "⑤ 400대, 50회"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-23",
+        "questionNumber": "23",
+        "title": "23. 다음은 K사의 월별 스마트폰 판매량을 나타낸 것이다. 4월의 수요를 예측한 값으로 옳은 것은? (단, 이동평균법의 경우 이동기간 n=3, 가중이동평균법의 경우 가중치는 최근기간으로부터 0.5, 0.3, 0.2 적용, 지수평활법의 경우 전월 예측치는 45만대였으며, 평활계수(α)는 0.8을 적용, 예측치는 소수점 둘째자리에서 반올림한다.)<div class='text-sm text-left mt-2 ml-2'><table class='question-table'><thead><tr><th>월</th><th>실제수요<br>(만대)</th><th>이동평균법<br>예측치(만대)</th><th>가중이동평균법<br>예측치(만대)</th><th>지수평활법<br>예측치(만대)</th></tr></thead><tbody><tr><td>1</td><td>40</td><td></td><td></td><td></td></tr><tr><td>2</td><td>43</td><td></td><td></td><td></td></tr><tr><td>3</td><td>42</td><td></td><td></td><td>45</td></tr><tr><td>4</td><td>44</td><td>(ㄱ)</td><td>(ㄴ)</td><td>(ㄷ)</td></tr></tbody></table></div>",
+        "choices": [
+          "① ㄱ:41.7, ㄴ: 41.9, ㄷ: 42.6",
+          "② ㄱ:41.7, ㄴ: 43.2, ㄷ: 44.2",
+          "③ ㄱ:43.0, ㄴ: 43.2, ㄷ: 42.6",
+          "④ ㄱ:43.0, ㄴ: 41.9, ㄷ: 44.2",
+          "⑤ ㄱ:43.0, ㄴ: 43.2, ㄷ: 44.2"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-24",
+        "questionNumber": "24",
+        "title": "24. 재고의사결정과 관련된 비용 중 재고유지비용에 해당되는 항목의 개수는?<div class='text-sm text-left mt-2 ml-2'>○ 자본비용 ○ 저장비용 ○ 진부화비용<br>○ 품절비용 ○ 도난 및 파손 비용 ○ 주문비용</div>",
+        "choices": [
+          "① 2개",
+          "② 3개",
+          "③ 4개",
+          "④ 5개",
+          "⑤ 6개"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-25",
+        "questionNumber": "25",
+        "title": "25. K사는 제품 A를 판매하고 있으며 영업일은 200일, 연간 총수요량은 12,000개이다. 제품 A의 안전재고는 135개로 정하고, 공급사에 제품을 주문 시 4일 후에 창고에 입고될 경우 재주문점(ROP; Reorder Point)은?",
+        "choices": [
+          "① 60개",
+          "② 120개",
+          "③ 240개",
+          "④ 375개",
+          "⑤ 405개"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-26",
+        "questionNumber": "26",
+        "title": "26. 하역합리화 기본원칙 중 활성화의 원칙에서 활성지수가 '2'인 화물의 상태는? (단, 활성지수는 0~4이다.)",
+        "choices": [
+          "① 컨베이어 위에 놓여 있는 상태",
+          "② 상자 속에 집어넣은 상태",
+          "③ 개품이 바닥에 놓여 있는 상태",
+          "④ 파렛트 및 스키드에 쌓은 상태",
+          "⑤ 대차에 실어 놓은 상태"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-27",
+        "questionNumber": "27",
+        "title": "27. 다음이 설명하는 컨테이너 하역작업 용어는?<div class='text-sm text-left mt-2 ml-2'>운송장비에 실려진 화물이 손상 및 파손되지 않도록 화물의 밑바닥이나 틈 사이에 물건을 깔거나 끼우는 작업</div>",
+        "choices": [
+          "① 배닝(Vanning)",
+          "② 래싱(Lashing)",
+          "③ 디배닝(Devanning)",
+          "④ 더니징(Dunnaging)",
+          "⑤ 스태킹(Stacking)"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-28",
+        "questionNumber": "28",
+        "title": "28. 보관장소에 따른 하역의 분류가 아닌 것은?",
+        "choices": [
+          "① 액체화물 하역",
+          "② 터미널 하역",
+          "③ 항만 하역",
+          "④ 창고 하역",
+          "⑤ 배송센터 하역"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-29",
+        "questionNumber": "29",
+        "title": "29. 컨베이어의 장점으로 옳지 않은 것은?",
+        "choices": [
+          "① 좁은 장소에서 작업이 가능하다.",
+          "② 중력을 이용한 운반이 가능하다.",
+          "③ 물품이 포장되어야 운반이 가능하다.",
+          "④ 다른 기기와 연계하여 사용이 가능하다.",
+          "⑤ 원격조정이나 자동제어가 가능하다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-30",
+        "questionNumber": "30",
+        "title": "30. 다음이 설명하는 하역장비는?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 카운터 밸런스형 대형 지게차에 컨테이너 4개의 모서리쇠를 끼워 컨테이너를 고정할 수 있는 스프레더나 체결고리가 달린 유압식 지브 혹은 신축형 붐으로 높이를 조절할 수 있는 컨테이너 상하역장비<br>ㄴ. 안벽을 따라 설치된 레일 위를 주행하면서 컨테이너를 선박에 적재하거나 하역하는데 사용되는 장비</div>",
+        "choices": [
+          "① ㄱ: 트랜스퍼 크레인(Transfer Crane), ㄴ: 리치스태커(Reach Stacker)",
+          "② ㄱ: 리치스태커(Reach Stacker), ㄴ: 컨테이너 크레인(Container Crane)",
+          "③ ㄱ: 스트래들 캐리어(Straddle Carrier), ㄴ: 컨테이너 크레인(Container Crane)",
+          "④ ㄱ: 리치스태커(Reach Stacker), ㄴ: 트랜스퍼 크레인(Transfer Crane)",
+          "⑤ ㄱ: 스트래들 캐리어(Straddle Carrier), ㄴ: 트랜스퍼 크레인(Transfer Crane)"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-31",
+        "questionNumber": "31",
+        "title": "31. 랙(Rack)에 관한 설명으로 옳은 것은?",
+        "choices": [
+          "① 적층 랙(Mezzanine Rack): 소품종 대량 입출고될 수 있는 물품 보관에 적합하고 적재 공간을 지게차 통로로 활용하여 적재 효율은 높으나 선입후출(先入後出)해야 하는 단점이 있다.",
+          "② 모빌랙(Mobile Rack): 레일을 이용하여 직선적으로 수평 이동되는 랙으로 통로를 대폭 절약할 수 있어 다품종 소량의 보관에 적합하다.",
+          "③ 플로 랙(Flow Rack): 피킹시 피커를 고정하고 랙 자체가 회전하는 형태로 다품종 소량물품과 가벼운 물품에 많이 이용된다.",
+          "④ 회전 랙(Carousel Rack): 외팔지주걸이 구조로 기본 프레임에 암(Arm)을 결착하여 물품을 보관하는 랙으로 파이프, 가구, 목재 등의 장척물 보관에 적합하다.",
+          "⑤ 드라이브 인 랙(Drive-in Rack): 천정이 높은 창고에서 복층구조로 겹쳐 쌓는 방식으로 물품의 보관 효율과 공간 효용도가 높다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-32",
+        "questionNumber": "32",
+        "title": "32. 유닛로드 시스템(Unit Load System)의 장점에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 물류관리의 시스템화가 용이하여 하역과 수송의 일관화를 가능하게 한다.",
+          "② 대규모 자본투자가 필요 없고 유닛로드용의 자재를 관리하기가 쉬워진다.",
+          "③ 수송 및 보관업무의 효율적인 운영과 수송포장의 간이화를 가능하게 한다.",
+          "④ 하역작업의 혁신을 통해 수송합리화를 도모할 수 있다.",
+          "⑤ 호환성이 증대되어 다른 회사와 공동으로 파렛트를 사용하는 등 시스템 연계성을 높일 수 있다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-33",
+        "questionNumber": "33",
+        "title": "33. T11 표준파렛트에 500 mm × 300 mm × 200mm 크기의 물품을 적재하려고 한다. 파렛트 적재방법을 핀휠 (Pinwheel) 적재에서 블록(Block) 적재로 변경하면 파렛트의 바닥면적 적재율(또는 표면이용률)은 변경 전과 비교할 때 얼마나 변동하는가? (단, 적재 높이는 200mm를 유지해야 한다.)",
+        "choices": [
+          "① 25% 감소",
+          "② 50% 감소",
+          "③ 10% 증가",
+          "④ 25% 증가",
+          "⑤ 50% 증가"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-34",
+        "questionNumber": "34",
+        "title": "34. 파렛트 풀 시스템(PPS; Pallet Pool System)에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 운영방식으로 TOFC(Trailer On Flat Car) 방식과 COFC(Container On Flat Car) 방식이 있다.",
+          "② 운송형태로 기업단위 PPS, 업계단위 PPS, 개방적 PPS가 있다.",
+          "③ 전체적인 파렛트 수량이 줄어들어 사회자본이 줄고 물류기기, 시설의 규격화 및 표준화가 촉진된다.",
+          "④ 표준화된 파렛트를 화주, 물류업자들이 공동으로 이용하는 제도로서 풀(Pool)조직이 파렛트에 대한 납품, 회수관리, 수리를 담당한다.",
+          "⑤ 지역간 수급해결, 계절적 수요대응, 설비자금 절감을 위하여 필요한 시스템이다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-35",
+        "questionNumber": "35",
+        "title": "35. 다음의 분류시스템 방식은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 레일을 주행하는 연속된 소형 벨트컨베이어를 레일과 교차하는 방향에서 구동시켜 분류하는 방식으로 통신 판매, 의약품, 화장품에 많이 사용된다.<br>ㄴ. 컨베이어를 주행하는 트레이, 슬라이드에 물품을 적재하였다가 분류되는 순간에 트레이, 슬라이드가 기울어지는 방식으로 고속처리가 가능하지만 중력에 의한 파손품이 발생할 수 있다.<br>ㄷ. 컨베이어의 아래 방향에서 분기장치가 튀어나와 분류하는 방식으로 화물의 하부면에 충격을 주는 단점이 있다.<br>ㄹ. 외부에 설치된 안내판을 회전시켜 컨베이어에 가이드벽을 만들어 이동시키는 방식으로 화물 형상에 관계없이 분류가 가능하기 때문에 다양한 종류의 화물을 처리하는 데 사용된다.</div>",
+        "choices": [
+          "① ㄱ: 크로스벨트 방식(Cross-belt Type), ㄴ: 틸팅 방식(Tilting Type), ㄷ: 팝업 방식(Pop-up Type), ㄹ: 다이버터 방식(Diverter Type)",
+          "② ㄱ: 슬라이딩 슈 방식(Sliding Shoe Type), ㄴ: 틸팅 방식(Tilting Type), ㄷ: 팝업 방식(Pop-up Type), ㄹ: 크로스벨트 방식(Cross-belt Type)",
+          "③ ㄱ: 크로스벨트 방식(Cross-belt Type), ㄴ: 팝업 방식(Pop-up Type), ㄷ: 틸팅 방식(Tilting Type), ㄹ: 다이버터 방식(Diverter Type)",
+          "④ ㄱ: 크로스벨트 방식(Cross-belt Type), ㄴ: 틸팅 방식(Tilting Type), ㄷ: 슬라이딩 슈 방식(Sliding Shoe Type), ㄹ: 다이버터 방식(Diverter Type)",
+          "⑤ ㄱ: 틸팅 방식(Tilting Type), ㄴ: 크로스벨트 방식(Cross-belt Type), ㄷ: 팝업 방식(Pop-up Type), ㄹ: 다이버터 방식(Diverter Type)"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-36",
+        "questionNumber": "36",
+        "title": "36. 일관파렛트화의 효과에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 물류비용이 저렴해진다.",
+          "② 운송과 하역 작업시간이 단축된다.",
+          "③ 기업간 물류 시스템의 제휴가 가능해진다.",
+          "④ 작업의 기계화가 진행되어 노동환경이 개선된다.",
+          "⑤ 과잉생산 방지, 안정된 가동률 유지가 가능해진다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-37",
+        "questionNumber": "37",
+        "title": "37. 컨테이너 터미널이 연간 100,000 TEU의 물동량을 처리하고 있다. 평균 장치일수는 10일, 피크 및 분리계수는 각각 1.5, 평균장치단수는 4단일 경우 소요되는 TGS(Twenty-foot Ground Slot) 수는? (단, 연간영업일수는 365일이다.)",
+        "choices": [
+          "① 771",
+          "② 1,460",
+          "③ 1,541",
+          "④ 2,920",
+          "⑤ 3,082"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-38",
+        "questionNumber": "38",
+        "title": "38. 항만하역기기 중 컨테이너 터미널 하역기기에 해당하지 않는 것은?",
+        "choices": [
+          "① 트랜스퍼 크레인(Transfer Crane)",
+          "② 리치스태커(Reach Stacker)",
+          "③ 탑 핸들러(Top Handler)",
+          "④ 야드 트랙터(Yard Tractor)",
+          "⑤ 로딩 암(Loading Arm)"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-39",
+        "questionNumber": "39",
+        "title": "39. 포장기법에 관한 설명으로 옳은 것을 모두 고른 것은?<div class='text-sm text-left mt-2 ml-2'>ㄱ. 방수방습포장: 식품원료의 생리적 대사과정을 지연시키고 취급과정 중 미생물에 의한 오염을 줄이는 포장기법이다.<br>ㄴ. 가스치환포장: 내용물의 활성화를 정지시키기 위하여 내부를 진공으로 밀봉하는 포장기법이다.<br>ㄷ. 완충포장: 생산 공장에서 최종 소비자까지 전달되는 유통과정에서 받는 외력에서 포장되어 있는 제품의 파손을 방지하고 안전하게 보호하는 포장기법이다.<br>ㄹ. 방청포장: 운송 중이나 보관 중에 제품을 발청이나 부식으로부터 방지하기 위한 포장기법이다.</div>",
+        "choices": [
+          "① ㄱ, ㄴ",
+          "② ㄴ, ㄷ",
+          "③ ㄷ, ㄹ",
+          "④ ㄱ, ㄴ, ㄹ",
+          "⑤ ㄱ, ㄷ, ㄹ"
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      },
+      {
+        "id": "storage_stevedoring-2017-40",
+        "questionNumber": "40",
+        "title": "40. 화물의 취급표시(화인) 방법에 관한 설명으로 옳지 않은 것은?",
+        "choices": [
+          "① 스탬핑(Stamping): 고무인이나 프레스기를 사용하여 찍는 방법으로 종이상자, 골판지상자에 적용된다.",
+          "② 태그(Tag): 종이, 플라스틱판에 표시내용을 기재한 후 철사, 끈으로 매다는 방법이다.",
+          "③ 스텐실(Stencil): 시트에 문자를 파두었다가 붓, 스프레이로 칠하는 방법으로 나무상자, 드럼에 적용된다.",
+          "④ 레이블링(Labeling): 종이나 직포에 필요한 내용을 미리 인쇄해 두었다가 일정한 위치에 붙이는 것으로 통조림, 유리병에 적용된다.",
+          "⑤ 스티커(Sticker): 금속제품에 사용하는 방법으로 주물을 주입할 때 미리 화인을 해 두어 완성 시 화인이 나타나도록 하는 방법이다."
+        ],
+        "correctChoiceIndex": null,
+        "answerText": "",
+        "explanation": "",
+        "purpose": ""
+      }
+    ]
+  }
+}
