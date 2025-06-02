@@ -207,6 +207,25 @@
                         throw new Error(`HTTP error! status: ${response.status} - ${fileName}`);
                     }
                     const jsonData = await response.json();
+                    if (fileName === "logistics_2017-2.json") {
+                        console.log("[DEBUG] Processing logistics_2017-2.json");
+                        console.log("[DEBUG] selectedSubject:", selectedSubject);
+                        console.log("[DEBUG] selectedYear:", selectedYear);
+                        console.log("[DEBUG] jsonData object:", jsonData);
+                        console.log("[DEBUG] Keys in jsonData:", Object.keys(jsonData));
+                        if (jsonData.hasOwnProperty(selectedSubject)) {
+                            console.log("[DEBUG] jsonData has property selectedSubject:", selectedSubject);
+                            if (jsonData[selectedSubject].hasOwnProperty(selectedYear)) {
+                                console.log("[DEBUG] jsonData[selectedSubject] has property selectedYear:", selectedYear);
+                                console.log("[DEBUG] Data to be loaded:", jsonData[selectedSubject][selectedYear]);
+                            } else {
+                                console.warn("[DEBUG] jsonData[selectedSubject] does NOT have property selectedYear:", selectedYear);
+                                console.warn("[DEBUG] Keys in jsonData[selectedSubject]:", Object.keys(jsonData[selectedSubject]));
+                            }
+                        } else {
+                            console.warn("[DEBUG] jsonData does NOT have property selectedSubject:", selectedSubject);
+                        }
+                    }
                     if (!DUMMY_QUESTIONS_DB[selectedSubject]) {
                         DUMMY_QUESTIONS_DB[selectedSubject] = {};
                     }
