@@ -20,15 +20,20 @@
             animation: gradient-animation 15s ease infinite;
             color: #e0e0e0;
         }
+        
+        .main-container {
+             text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
 
         .chinese-lyric {
             font-family: 'Noto Sans SC', sans-serif;
             cursor: pointer;
             transition: color 0.3s ease;
+            outline: none; /* Remove default focus outline */
         }
-
-        .chinese-lyric:hover {
-            color: #93c5fd; /* Light blue on hover */
+        
+        .chinese-lyric:hover, .chinese-lyric:focus-visible {
+            color: #93c5fd; /* Light blue on hover/focus */
         }
 
         .korean-translation {
@@ -58,15 +63,16 @@
             text-decoration-style: dotted;
             cursor: help;
             transition: color 0.3s, text-decoration-color 0.3s;
+            outline: none; /* Remove default focus outline */
         }
         
-        .dict-word:hover {
+        .dict-word:hover, .dict-word:focus-visible {
              color: #facc15; /* yellow-400 */
              text-decoration-color: #facc15;
         }
 
         #word-popup {
-            position: absolute;
+            position: fixed; /* Use fixed positioning for viewport-relative placement */
             display: none;
             background-color: rgba(41, 37, 78, 0.95);
             backdrop-filter: blur(5px);
@@ -78,7 +84,8 @@
             font-size: 0.9rem;
             z-index: 100;
             transition: opacity 0.2s, transform 0.2s;
-            pointer-events: none; /* Important for positioning */
+            pointer-events: none;
+            max-width: 300px;
         }
         #word-popup .pinyin {
             color: #a5b4fc;
@@ -86,7 +93,7 @@
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-2xl bg-black/30 backdrop-blur-md rounded-2xl shadow-2xl p-6 md:p-10 border border-white/10">
+    <div class="main-container w-full max-w-2xl bg-black/30 backdrop-blur-md rounded-2xl shadow-2xl p-6 md:p-10 border border-white/10">
         <div class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold text-blue-300 chinese-lyric">海闊天空</h1>
             <p class="text-xl md:text-2xl text-blue-400 title-kr">(해활천공)</p>
@@ -98,8 +105,8 @@
         </div>
 
         <div class="text-center mt-8 text-sm text-gray-400">
-            <p>중국어 가사를 클릭하면 번역이 나타납니다.</p>
-            <p>번역이 열린 후, 밑줄 친 단어를 클릭하면 뜻을 볼 수 있습니다.</p>
+            <p>중국어 가사를 클릭하거나 선택 후 Enter를 누르세요.</p>
+            <p>밑줄 친 단어를 클릭하면 뜻을 볼 수 있습니다.</p>
         </div>
     </div>
 
@@ -111,29 +118,30 @@
     </div>
 
     <script>
-        // Dictionary of key words with pinyin and meaning
-        const dictionary = {
-            "今天": { pinyin: "jīn tiān", meaning: "오늘" },
-            "寒夜": { pinyin: "hán yè", meaning: "추운 밤" },
-            "看雪": { pinyin: "kàn xuě", meaning: "눈을 보다" },
-            "飄過": { pinyin: "piāo guò", meaning: "흩날려 지나가다" },
-            "懷著": { pinyin: "huái zhe", meaning: "품고서" },
-            "冷卻": { pinyin: "lěng què", meaning: "식다, 냉각되다" },
-            "心窩": { pinyin: "xīn wō", meaning: "마음, 가슴" },
-            "遠方": { pinyin: "yuǎn fāng", meaning: "먼 곳" },
-            "風雨": { pinyin: "fēng yǔ", meaning: "비바람" },
-            "追趕": { pinyin: "zhuī gǎn", meaning: "뒤쫓다" },
-            "理想": { pinyin: "lǐ xiǎng", meaning: "이상" },
-            "自由": { pinyin: "zì yóu", meaning: "자유" },
-            "原諒": { pinyin: "yuán liàng", meaning: "용서하다" },
-            "跌倒": { pinyin: "diē dǎo", meaning: "넘어지다" },
-            "放縱": { pinyin: "fàng zòng", meaning: "방종하다, 제멋대로 하다" },
-            "不羈": { pinyin: "bù jī", meaning: "얽매이지 않다" },
-            "嘲笑": { pinyin: "cháo xiào", meaning: "비웃다" },
-            "冷眼": { pinyin: "lěng yǎn", meaning: "냉담한 눈초리" }
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA ---
+            const dictionary = {
+                "今天": { pinyin: "jīn tiān", meaning: "오늘" },
+                "寒夜": { pinyin: "hán yè", meaning: "추운 밤" },
+                "看雪": { pinyin: "kàn xuě", meaning: "눈을 보다" },
+                "飄過": { pinyin: "piāo guò", meaning: "흩날려 지나가다" },
+                "懷著": { pinyin: "huái zhe", meaning: "품고서" },
+                "冷卻": { pinyin: "lěng què", meaning: "식다, 냉각되다" },
+                "心窩": { pinyin: "xīn wō", meaning: "마음, 가슴" },
+                "遠方": { pinyin: "yuǎn fāng", meaning: "먼 곳" },
+                "風雨": { pinyin: "fēng yǔ", meaning: "비바람" },
+                "追趕": { pinyin: "zhuī gǎn", meaning: "뒤쫓다" },
+                "理想": { pinyin: "lǐ xiǎng", meaning: "이상" },
+                "自由": { pinyin: "zì yóu", meaning: "자유" },
+                "原諒": { pinyin: "yuán liàng", meaning: "용서하다" },
+                "跌倒": { pinyin: "diē dǎo", meaning: "넘어지다" },
+                "放縱": { pinyin: "fàng zòng", meaning: "방종하다, 제멋대로 하다" },
+                "不羈": { pinyin: "bù jī", meaning: "얽매이지 않다" },
+                "嘲笑": { pinyin: "cháo xiào", meaning: "비웃다" },
+                "冷眼": { pinyin: "lěng yǎn", meaning: "냉담한 눈초리" }
+            };
 
-        const lyricsText = `今天我 寒夜裡看雪飄過
+            const lyricsText = `今天我 寒夜裡看雪飄過
 오늘 나는 차가운 밤에 눈이 흩날리는 것을 보네
 懷著冷卻了的心窩漂遠方
 식어버린 마음을 품고 멀리 떠나가네
@@ -149,14 +157,6 @@
 수없이 차가운 눈초리와 비웃음을 마주했지만
 從沒有放棄過心中的理想
 마음속 이상을 포기한 적 없었네
-一剎那恍惚
-순간적인 멍함
-若有所失的感覺
-무언가를 잃은 듯한 느낌
-不知不覺已變淡
-어느새 희미해져 버렸네
-心裡愛 (誰明白我)
-마음속의 사랑 (누가 나를 이해할까)
 原諒我這一生不羈放縱愛自由
 내 평생 구속 없이 자유를 사랑한 것을 용서해주오
 也會怕有一天會跌倒
@@ -170,31 +170,39 @@
 永遠高唱我歌走遍千里
 영원히 내 노래를 부르며 천 리 길을 가리라`;
 
-        function createLyricBlocks() {
+            // --- ELEMENTS ---
             const container = document.getElementById('lyrics-container');
-            const popup = document.getElementById('word-popup');
-            const lines = lyricsText.trim().split('\n');
+            const popupEl = document.getElementById('word-popup');
 
-            // Get dictionary keys sorted by length, longest first
-            const dictKeys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
+            // --- FUNCTIONS ---
+            
+            // Utility to escape special regex characters
+            const escapeRegExp = (string) => {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            };
 
-            for (let i = 0; i < lines.length; i += 2) {
-                if (lines[i] && lines[i+1]) {
+            const createLyricBlocks = () => {
+                const lines = lyricsText.trim().split('\n');
+                const dictKeys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
+
+                for (let i = 0; i < lines.length; i += 2) {
+                    if (!lines[i] || !lines[i+1]) continue;
+
                     const lyricBlock = document.createElement('div');
                     lyricBlock.className = 'lyric-block py-2';
-                    
+
                     const chineseLine = document.createElement('p');
                     chineseLine.className = 'chinese-lyric text-gray-200';
-                    
-                    // Process line to wrap dictionary words in spans
+                    chineseLine.tabIndex = 0; // For accessibility
+                    chineseLine.setAttribute('role', 'button');
+
                     let processedHTML = lines[i];
                     dictKeys.forEach(key => {
-                        // Use a regex to replace all occurrences of the key
-                        const regex = new RegExp(key, "g");
-                        processedHTML = processedHTML.replace(regex, `<span class="dict-word" data-word="${key}">${key}</span>`);
+                        const regex = new RegExp(escapeRegExp(key), "g");
+                        processedHTML = processedHTML.replace(regex, `<span class="dict-word" data-word="${key}" tabindex="0" role="button">${key}</span>`);
                     });
                     chineseLine.innerHTML = processedHTML;
-                    
+
                     const koreanLine = document.createElement('p');
                     koreanLine.className = 'korean-translation';
                     koreanLine.textContent = lines[i+1];
@@ -202,73 +210,101 @@
                     lyricBlock.appendChild(chineseLine);
                     lyricBlock.appendChild(koreanLine);
                     container.appendChild(lyricBlock);
-
-                    // Event listener for the whole line
-                    chineseLine.addEventListener('click', (e) => {
-                        if (e.target.classList.contains('dict-word')) return; // Don't toggle if a word is clicked
-                        
-                        const isActive = lyricBlock.classList.contains('active');
-                        document.querySelectorAll('.lyric-block.active').forEach(block => block.classList.remove('active'));
-                        if (!isActive) lyricBlock.classList.add('active');
-                    });
-
-                    // Event listeners for individual words
-                    lyricBlock.querySelectorAll('.dict-word').forEach(wordSpan => {
-                        wordSpan.addEventListener('click', (e) => {
-                            e.stopPropagation(); // Prevent line click event
-                            if (!lyricBlock.classList.contains('active')) {
-                                // If translation isn't open, open it first.
-                                document.querySelectorAll('.lyric-block.active').forEach(block => block.classList.remove('active'));
-                                lyricBlock.classList.add('active');
-                            }
-
-                            const word = e.target.dataset.word;
-                            const definition = dictionary[word];
-                            showPopup(word, definition, e.clientX, e.clientY);
-                        });
-                    });
-
                 }
-            }
-        }
-        
-        const popupEl = document.getElementById('word-popup');
-        function showPopup(word, def, x, y) {
-            document.getElementById('popup-word').textContent = word;
-            document.getElementById('popup-pinyin').textContent = `[${def.pinyin}]`;
-            document.getElementById('popup-meaning').textContent = def.meaning;
-            popupEl.style.left = `${x}px`;
-            popupEl.style.top = `${y + 15}px`; // Position below cursor
-            popupEl.style.display = 'block';
-            popupEl.style.opacity = '0';
-            popupEl.style.transform = 'translate(-50%, 0) scale(0.9)';
+            };
             
-            setTimeout(() => {
+            const showPopup = (word, def, x, y) => {
+                popupEl.querySelector('#popup-word').textContent = word;
+                popupEl.querySelector('#popup-pinyin').textContent = `[${def.pinyin}]`;
+                popupEl.querySelector('#popup-meaning').textContent = def.meaning;
+
+                popupEl.style.display = 'block';
+                
+                // Adjust position to stay within the viewport
+                const popupRect = popupEl.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                let top = y + 20;
+                let left = x;
+
+                // If popup goes off the bottom, show it above the cursor
+                if (top + popupRect.height > viewportHeight) {
+                    top = y - popupRect.height - 10;
+                }
+                
+                // If popup goes off the right, align its right edge with the cursor
+                if (left + popupRect.width > viewportWidth) {
+                    left = viewportWidth - popupRect.width - 10;
+                }
+                
+                // If popup goes off the left, align its left edge
+                if (left < 0) {
+                   left = 10;
+                }
+
+                popupEl.style.left = `${left}px`;
+                popupEl.style.top = `${top}px`;
                 popupEl.style.opacity = '1';
-                popupEl.style.transform = 'translate(-50%, 0) scale(1)';
-            }, 10);
-        }
+                popupEl.style.transform = 'scale(1)';
+            };
 
-        function hidePopup() {
-            popupEl.style.opacity = '0';
-            popupEl.style.transform = 'translate(-50%, 0) scale(0.9)';
-            setTimeout(() => {
-                 if (popupEl.style.opacity === '0') popupEl.style.display = 'none';
-            }, 200);
-        }
+            const hidePopup = () => {
+                popupEl.style.opacity = '0';
+                popupEl.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    if (popupEl.style.opacity === '0') popupEl.style.display = 'none';
+                }, 200);
+            };
 
-        // Hide popup when clicking anywhere else
-        document.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('dict-word')) {
-                hidePopup();
-            }
+            // --- EVENT HANDLING ---
+            const handleInteraction = (e) => {
+                const isKeyEvent = e.type === 'keydown';
+                if (isKeyEvent && e.key !== 'Enter' && e.key !== ' ') return;
+                
+                e.preventDefault();
+                const target = e.target;
+
+                // Handle word click/keypress
+                if (target.classList.contains('dict-word')) {
+                    const lyricBlock = target.closest('.lyric-block');
+                    if (!lyricBlock.classList.contains('active')) {
+                        document.querySelectorAll('.lyric-block.active').forEach(b => b.classList.remove('active'));
+                        lyricBlock.classList.add('active');
+                    }
+                    const word = target.dataset.word;
+                    const definition = dictionary[word];
+                    
+                    const rect = target.getBoundingClientRect();
+                    showPopup(word, definition, rect.left, rect.bottom);
+                    return;
+                }
+
+                // Handle line click/keypress
+                const lyricLine = target.closest('.chinese-lyric');
+                if (lyricLine) {
+                    const lyricBlock = lyricLine.closest('.lyric-block');
+                    const isActive = lyricBlock.classList.contains('active');
+                    document.querySelectorAll('.lyric-block.active').forEach(b => b.classList.remove('active'));
+                    if (!isActive) lyricBlock.classList.add('active');
+                    hidePopup();
+                }
+            };
+            
+            // Main event listener using delegation
+            container.addEventListener('click', handleInteraction);
+            container.addEventListener('keydown', handleInteraction);
+
+            // Hide popup on outside actions
+            document.addEventListener('click', (e) => {
+                if (!container.contains(e.target)) hidePopup();
+            });
+            window.addEventListener('scroll', hidePopup, true); // Use capture to catch scroll early
+            window.addEventListener('resize', hidePopup);
+
+            // --- INITIALIZATION ---
+            createLyricBlocks();
         });
-
-        // Hide popup on scroll
-        window.addEventListener('scroll', hidePopup);
-        
-        document.addEventListener('DOMContentLoaded', createLyricBlocks);
-
     </script>
 </body>
 </html>
