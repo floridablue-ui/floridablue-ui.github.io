@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>해활천공 (海闊天空) - Beyond</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         @keyframes gradient-animation {
@@ -28,20 +29,27 @@
         .chinese-lyric {
             font-family: 'Noto Sans SC', sans-serif;
             cursor: pointer;
-            transition: color 0.3s ease;
-            outline: none; /* Remove default focus outline */
+            transition: color 0.3s ease, background-color 0.3s;
+            outline: none;
+            padding: 8px 12px;
+            border-radius: 6px;
         }
         
         .chinese-lyric:hover, .chinese-lyric:focus-visible {
-            color: #93c5fd; /* Light blue on hover/focus */
+            color: #93c5fd;
+        }
+
+        .lyric-block.active .chinese-lyric {
+            background-color: rgba(67, 56, 202, 0.3);
+            color: #c7d2fe;
         }
 
         .korean-translation {
             display: none;
-            color: #a5b4fc; /* Indigo-200 for better contrast */
+            color: #a5b4fc;
             padding-left: 1rem;
             margin-top: 0.5rem;
-            border-left: 2px solid #6366f1; /* Indigo-500 */
+            border-left: 2px solid #6366f1;
             opacity: 0;
             transform: translateY(-10px);
             transition: opacity 0.4s ease, transform 0.4s ease;
@@ -52,10 +60,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        .title-kr {
-             font-family: 'Noto Sans KR', sans-serif;
-        }
         
         .dict-word {
             text-decoration: underline;
@@ -63,21 +67,20 @@
             text-decoration-style: dotted;
             cursor: help;
             transition: color 0.3s, text-decoration-color 0.3s;
-            outline: none; /* Remove default focus outline */
+            outline: none;
         }
         
         .dict-word:hover, .dict-word:focus-visible {
-             color: #facc15; /* yellow-400 */
+             color: #facc15;
              text-decoration-color: #facc15;
         }
 
         #word-popup {
-            position: fixed; /* Use fixed positioning for viewport-relative placement */
+            position: fixed;
             display: none;
             background-color: rgba(41, 37, 78, 0.95);
             backdrop-filter: blur(5px);
             border: 1px solid #6366f1;
-            color: white;
             padding: 10px 15px;
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
@@ -90,55 +93,60 @@
         #word-popup .pinyin {
             color: #a5b4fc;
         }
+        
+        .copy-button {
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+        
+        .lyric-block:hover .copy-button,
+        .lyric-block.active .copy-button {
+            opacity: 1;
+        }
+        
+        .copy-button:hover {
+            color: #e5e7eb;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="main-container w-full max-w-2xl bg-black/30 backdrop-blur-md rounded-2xl shadow-2xl p-6 md:p-10 border border-white/10">
-        <div class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-300 chinese-lyric">海闊天空</h1>
-            <p class="text-xl md:text-2xl text-blue-400 title-kr">(해활천공)</p>
+<body class="flex items-center justify-center min-h-screen py-8 px-4">
+    <div class="main-container w-full max-w-3xl bg-black/30 backdrop-blur-md rounded-2xl shadow-2xl p-6 md:p-10 border border-white/10">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-300">海闊天空</h1>
+            <p class="text-xl md:text-2xl text-blue-400">(해활천공)</p>
             <p class="text-lg text-gray-300 mt-2">Beyond</p>
         </div>
+        
+        <div class="mb-8 aspect-w-16 aspect-h-9">
+            <iframe src="https://www.youtube.com/embed/qu_FSptjRic" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full rounded-lg shadow-lg"></iframe>
+        </div>
 
-        <div id="lyrics-container" class="space-y-4 text-lg md:text-xl">
+        <div id="lyrics-container" class="space-y-2 text-lg md:text-xl">
             <!-- Lyrics will be inserted here by JavaScript -->
         </div>
 
         <div class="text-center mt-8 text-sm text-gray-400">
-            <p>중국어 가사를 클릭하거나 선택 후 Enter를 누르세요.</p>
-            <p>밑줄 친 단어를 클릭하면 뜻을 볼 수 있습니다.</p>
+            <p>중국어 가사를 클릭하면 번역을 볼 수 있습니다.</p>
         </div>
     </div>
 
-    <!-- Popup for word definitions -->
     <div id="word-popup">
         <strong id="popup-word"></strong>
         <span id="popup-pinyin" class="pinyin"></span><br>
         <span id="popup-meaning"></span>
     </div>
 
+    <textarea id="copy-helper" style="position: absolute; left: -9999px;"></textarea>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- DATA ---
             const dictionary = {
-                "今天": { pinyin: "jīn tiān", meaning: "오늘" },
-                "寒夜": { pinyin: "hán yè", meaning: "추운 밤" },
-                "看雪": { pinyin: "kàn xuě", meaning: "눈을 보다" },
-                "飄過": { pinyin: "piāo guò", meaning: "흩날려 지나가다" },
-                "懷著": { pinyin: "huái zhe", meaning: "품고서" },
-                "冷卻": { pinyin: "lěng què", meaning: "식다, 냉각되다" },
-                "心窩": { pinyin: "xīn wō", meaning: "마음, 가슴" },
-                "遠方": { pinyin: "yuǎn fāng", meaning: "먼 곳" },
-                "風雨": { pinyin: "fēng yǔ", meaning: "비바람" },
-                "追趕": { pinyin: "zhuī gǎn", meaning: "뒤쫓다" },
-                "理想": { pinyin: "lǐ xiǎng", meaning: "이상" },
-                "自由": { pinyin: "zì yóu", meaning: "자유" },
-                "原諒": { pinyin: "yuán liàng", meaning: "용서하다" },
-                "跌倒": { pinyin: "diē dǎo", meaning: "넘어지다" },
-                "放縱": { pinyin: "fàng zòng", meaning: "방종하다, 제멋대로 하다" },
-                "不羈": { pinyin: "bù jī", meaning: "얽매이지 않다" },
-                "嘲笑": { pinyin: "cháo xiào", meaning: "비웃다" },
-                "冷眼": { pinyin: "lěng yǎn", meaning: "냉담한 눈초리" }
+                // Original words
+                "今天": { pinyin: "jīn tiān", meaning: "오늘" }, "寒夜": { pinyin: "hán yè", meaning: "추운 밤" }, "看雪": { pinyin: "kàn xuě", meaning: "눈을 보다" }, "飄過": { pinyin: "piāo guò", meaning: "흩날려 지나가다" }, "懷著": { pinyin: "huái zhe", meaning: "품고서" }, "冷卻": { pinyin: "lěng què", meaning: "식다, 냉각되다" }, "心窩": { pinyin: "xīn wō", meaning: "마음, 가슴" }, "遠方": { pinyin: "yuǎn fāng", meaning: "먼 곳" }, "風雨": { pinyin: "fēng yǔ", meaning: "비바람" }, "追趕": { pinyin: "zhuī gǎn", meaning: "뒤쫓다" }, "理想": { pinyin: "lǐ xiǎng", meaning: "이상" }, "自由": { pinyin: "zì yóu", meaning: "자유" }, "原諒": { pinyin: "yuán liàng", meaning: "용서하다" }, "跌倒": { pinyin: "diē dǎo", meaning: "넘어지다" }, "放縱": { pinyin: "fàng zòng", meaning: "방종하다, 제멋대로 하다" }, "不羈": { pinyin: "bù jī", meaning: "얽매이지 않다" }, "嘲笑": { pinyin: "cháo xiào", meaning: "비웃다" }, "冷眼": { pinyin: "lěng yǎn", meaning: "냉담한 눈초리" },
+                // Added words
+                "霧": { pinyin: "wù", meaning: "안개" }, "分不清": { pinyin: "fēn bu qīng", meaning: "분간할 수 없다" }, "影蹤": { pinyin: "yǐng zōng", meaning: "그림자와 자취" }, "天空": { pinyin: "tiān kōng", meaning: "하늘" }, "海闊": { pinyin: "hǎi kuò", meaning: "바다가 넓다" }, "變": { pinyin: "biàn", meaning: "변하다" }, "誰": { pinyin: "shéi", meaning: "누구" }, "多少次": { pinyin: "duō shǎo cì", meaning: "몇 번이나" }, "迎著": { pinyin: "yíng zhe", meaning: "맞서며" }, "從沒有": { pinyin: "cóng méi yǒu", meaning: "결코 ~한 적 없다" }, "放棄": { pinyin: "fàng qì", meaning: "포기하다" }, "心中": { pinyin: "xīn zhōng", meaning: "마음 속" }, "一剎那": { pinyin: "yí chà nà", meaning: "한순간" }, "恍惚": { pinyin: "huǎng hū", meaning: "황홀하다, 멍하다" }, "若有所失": { pinyin: "ruò yǒu suǒ shī", meaning: "무언가 잃은 듯하다" }, "感覺": { pinyin: "gǎn jué", meaning: "느낌" }, "不知不覺": { pinyin: "bù zhī bù jué", meaning: "나도 모르게" }, "變淡": { pinyin: "biàn dàn", meaning: "옅어지다" }, "心裡": { pinyin: "xīn lǐ", meaning: "마음 속" }, "愛": { pinyin: "ài", meaning: "사랑" }, "明白": { pinyin: "míng bai", meaning: "이해하다" }, "我": { pinyin: "wǒ", meaning: "나, 저" }, "這一生": { pinyin: "zhè yì shēng", meaning: "이 한평생" }, "也": { pinyin: "yě", meaning: "~도, 또한" }, "會": { pinyin: "huì", meaning: "~일 것이다 (가능성)" }, "怕": { pinyin: "pà", meaning: "두려워하다" }, "有一天": { pinyin: "yǒu yì tiān", meaning: "어느 날" }, "背棄": { pinyin: "bèi qì", meaning: "저버리다, 배신하다" }, "誰人": { pinyin: "shéi rén", meaning: "누구" }, "都": { pinyin: "dōu", meaning: "모두, 다" }, "可以": { pinyin: "kě yǐ", meaning: "~해도 좋다, ~할 수 있다" }, "只": { pinyin: "zhǐ", meaning: "단지, 다만" }, "你": { pinyin: "nǐ", meaning: "너, 당신" }, "共": { pinyin: "gòng", meaning: "함께" }, "仍然": { pinyin: "réng rán", meaning: "여전히, 아직도" }, "自我": { pinyin: "zì wǒ", meaning: "자아" }, "永遠": { pinyin: "yǒng yuǎn", meaning: "영원히" }, "高唱": { pinyin: "gāo chàng", meaning: "소리 높여 노래하다" }, "走遍": { pinyin: "zǒu biàn", meaning: "두루 다니다" }, "千里": { pinyin: "qiān lǐ", meaning: "천 리" }
             };
 
             const lyricsText = `今天我 寒夜裡看雪飄過
@@ -170,78 +178,70 @@
 永遠高唱我歌走遍千里
 영원히 내 노래를 부르며 천 리 길을 가리라`;
 
-            // --- ELEMENTS ---
             const container = document.getElementById('lyrics-container');
             const popupEl = document.getElementById('word-popup');
 
-            // --- FUNCTIONS ---
-            
-            // Utility to escape special regex characters
-            const escapeRegExp = (string) => {
-                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            };
+            const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
             const createLyricBlocks = () => {
                 const lines = lyricsText.trim().split('\n');
                 const dictKeys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
+                const fragment = document.createDocumentFragment();
 
                 for (let i = 0; i < lines.length; i += 2) {
                     if (!lines[i] || !lines[i+1]) continue;
 
                     const lyricBlock = document.createElement('div');
-                    lyricBlock.className = 'lyric-block py-2';
+                    lyricBlock.className = 'lyric-block group relative';
+
+                    const lineContainer = document.createElement('div');
+                    lineContainer.className = 'flex justify-between items-center';
 
                     const chineseLine = document.createElement('p');
-                    chineseLine.className = 'chinese-lyric text-gray-200';
-                    chineseLine.tabIndex = 0; // For accessibility
+                    chineseLine.className = 'chinese-lyric text-gray-200 flex-grow';
+                    chineseLine.tabIndex = 0;
                     chineseLine.setAttribute('role', 'button');
-
                     let processedHTML = lines[i];
                     dictKeys.forEach(key => {
-                        const regex = new RegExp(escapeRegExp(key), "g");
-                        processedHTML = processedHTML.replace(regex, `<span class="dict-word" data-word="${key}" tabindex="0" role="button">${key}</span>`);
+                        processedHTML = processedHTML.replace(new RegExp(escapeRegExp(key), "g"), `<span class="dict-word" data-word="${key}" tabindex="0" role="button">${key}</span>`);
                     });
                     chineseLine.innerHTML = processedHTML;
 
+                    const copyButton = document.createElement('button');
+                    copyButton.className = 'copy-button ml-4 p-2 rounded-full';
+                    copyButton.innerHTML = '<i class="far fa-copy"></i>';
+                    copyButton.dataset.chinese = lines[i];
+                    copyButton.dataset.korean = lines[i+1];
+                    copyButton.title = '가사 복사';
+
+                    lineContainer.appendChild(chineseLine);
+                    lineContainer.appendChild(copyButton);
+
                     const koreanLine = document.createElement('p');
-                    koreanLine.className = 'korean-translation';
+                    koreanLine.className = 'korean-translation ml-3';
                     koreanLine.textContent = lines[i+1];
                     
-                    lyricBlock.appendChild(chineseLine);
+                    lyricBlock.appendChild(lineContainer);
                     lyricBlock.appendChild(koreanLine);
-                    container.appendChild(lyricBlock);
+                    fragment.appendChild(lyricBlock);
                 }
+                container.appendChild(fragment);
             };
             
-            const showPopup = (word, def, x, y) => {
+            const showPopup = (word, def, target) => {
+                const rect = target.getBoundingClientRect();
                 popupEl.querySelector('#popup-word').textContent = word;
                 popupEl.querySelector('#popup-pinyin').textContent = `[${def.pinyin}]`;
                 popupEl.querySelector('#popup-meaning').textContent = def.meaning;
-
                 popupEl.style.display = 'block';
-                
-                // Adjust position to stay within the viewport
+
                 const popupRect = popupEl.getBoundingClientRect();
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-
-                let top = y + 20;
-                let left = x;
-
-                // If popup goes off the bottom, show it above the cursor
-                if (top + popupRect.height > viewportHeight) {
-                    top = y - popupRect.height - 10;
-                }
+                let top = rect.bottom + 8;
+                let left = rect.left + rect.width / 2 - popupRect.width / 2;
                 
-                // If popup goes off the right, align its right edge with the cursor
-                if (left + popupRect.width > viewportWidth) {
-                    left = viewportWidth - popupRect.width - 10;
-                }
-                
-                // If popup goes off the left, align its left edge
-                if (left < 0) {
-                   left = 10;
-                }
+                if (top + popupRect.height > window.innerHeight) top = rect.top - popupRect.height - 8;
+                if (left < 0) left = 8;
+                if (left + popupRect.width > window.innerWidth) left = window.innerWidth - popupRect.width - 8;
 
                 popupEl.style.left = `${left}px`;
                 popupEl.style.top = `${top}px`;
@@ -252,37 +252,40 @@
             const hidePopup = () => {
                 popupEl.style.opacity = '0';
                 popupEl.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    if (popupEl.style.opacity === '0') popupEl.style.display = 'none';
-                }, 200);
             };
 
-            // --- EVENT HANDLING ---
             const handleInteraction = (e) => {
+                const target = e.target;
                 const isKeyEvent = e.type === 'keydown';
                 if (isKeyEvent && e.key !== 'Enter' && e.key !== ' ') return;
-                
-                e.preventDefault();
-                const target = e.target;
 
-                // Handle word click/keypress
+                if (target.closest('.copy-button')) {
+                    e.preventDefault();
+                    const button = target.closest('.copy-button');
+                    const textToCopy = `${button.dataset.chinese}\n${button.dataset.korean}`;
+                    const copyHelper = document.getElementById('copy-helper');
+                    copyHelper.value = textToCopy;
+                    copyHelper.select();
+                    document.execCommand('copy');
+                    button.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => button.innerHTML = '<i class="far fa-copy"></i>', 1500);
+                    return;
+                }
+                
                 if (target.classList.contains('dict-word')) {
+                    e.preventDefault();
                     const lyricBlock = target.closest('.lyric-block');
                     if (!lyricBlock.classList.contains('active')) {
                         document.querySelectorAll('.lyric-block.active').forEach(b => b.classList.remove('active'));
                         lyricBlock.classList.add('active');
                     }
-                    const word = target.dataset.word;
-                    const definition = dictionary[word];
-                    
-                    const rect = target.getBoundingClientRect();
-                    showPopup(word, definition, rect.left, rect.bottom);
+                    showPopup(target.dataset.word, dictionary[target.dataset.word], target);
                     return;
                 }
 
-                // Handle line click/keypress
                 const lyricLine = target.closest('.chinese-lyric');
                 if (lyricLine) {
+                    e.preventDefault();
                     const lyricBlock = lyricLine.closest('.lyric-block');
                     const isActive = lyricBlock.classList.contains('active');
                     document.querySelectorAll('.lyric-block.active').forEach(b => b.classList.remove('active'));
@@ -291,18 +294,19 @@
                 }
             };
             
-            // Main event listener using delegation
             container.addEventListener('click', handleInteraction);
             container.addEventListener('keydown', handleInteraction);
 
-            // Hide popup on outside actions
             document.addEventListener('click', (e) => {
-                if (!container.contains(e.target)) hidePopup();
-            });
-            window.addEventListener('scroll', hidePopup, true); // Use capture to catch scroll early
+                if (!container.contains(e.target)) {
+                    document.querySelectorAll('.lyric-block.active').forEach(b => b.classList.remove('active'));
+                    hidePopup();
+                }
+            }, true);
+
+            window.addEventListener('scroll', hidePopup, true);
             window.addEventListener('resize', hidePopup);
 
-            // --- INITIALIZATION ---
             createLyricBlocks();
         });
     </script>
