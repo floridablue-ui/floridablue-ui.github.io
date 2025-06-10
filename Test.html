@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터랙티브 EOQ 학습 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Analytics -->
+    <!-- Application Structure Plan: 이 애플리케이션은 4개의 주요 섹션으로 구성된 단일 페이지 구조를 가집니다: (1)개념 소개, (2)비용 관계 시각화, (3)EOQ 계산기, (4)심화 내용(공식 유도/한계점). 이 구조는 사용자가 '무엇인지' 파악하고('소개'), '왜' 그런지 직관적으로 탐색한 후('비용 관계'), '어떻게' 사용하는지 적용해보고('계산기'), 마지막으로 '더 깊이' 파고들 수 있도록('심화') 설계되었습니다. 이는 정적인 문서보다 학습 효과를 극대화하는 사용자 경험 흐름을 제공합니다. -->
+    <!-- Visualization & Content Choices: 1.핵심 개념 -> 목표:정보전달 -> 표현:아이콘과 간결한 텍스트 -> 정당성:핵심 메시지를 빠르고 명확하게 전달. 2.비용의 상충관계 -> 목표:관계이해 -> 표현:Chart.js 기반 인터랙티브 라인차트와 슬라이더 -> 정당성:사용자가 주문량을 직접 조절하며 총비용 곡선의 최저점을 찾는 과정을 시각적으로 체험, EOQ 원리를 직관적으로 체득. 3.실제 계산 -> 목표:실용적 적용 -> 표현:실시간 업데이트되는 JS 계산기 -> 정당성:사용자에게 즉각적인 피드백을 제공하는 실용적인 도구 역할. 4.공식 유도/한계 -> 목표:정보 조직화 -> 표현:JS 아코디언 메뉴 -> 정당성:복잡한 정보를 기본 화면에서 숨겨 깔끔한 UI를 유지하고, 필요한 사용자만 접근하도록 하여 사용성을 높임. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 50vh;
+        }
+        @media (min-width: 640px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .section-fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .section-fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .section-fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .section-fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .section-fade-in:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-xl sm:text-2xl font-bold text-teal-600">인터랙티브 EOQ 학습 가이드</h1>
+            <div class="hidden sm:flex space-x-4">
+                <a href="#intro" class="text-slate-600 hover:text-teal-600 transition">소개</a>
+                <a href="#visualizer" class="text-slate-600 hover:text-teal-600 transition">비용 관계</a>
+                <a href="#calculator" class="text-slate-600 hover:text-teal-600 transition">EOQ 계산기</a>
+                <a href="#deep-dive" class="text-slate-600 hover:text-teal-600 transition">심화 학습</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        
+        <section id="intro" class="mb-16 section-fade-in">
+            <h2 class="text-3xl font-bold mb-4 text-center">경제적 주문수량(EOQ)이란?</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+                경제적 주문수량(EOQ)은 재고 관리와 관련된 총비용을 최소화하는 '1회 최적 주문량'입니다. 재고 비용은 크게 '주문 비용'과 '재고 유지 비용'으로 나뉘며, 이 둘은 서로 반대로 움직이는 상충 관계에 있습니다. EOQ는 이 두 비용의 균형점을 찾아냅니다.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                    <h3 class="text-xl font-bold mb-2 flex items-center"><span class="text-2xl mr-3">🚚</span>주문 비용 (Ordering Cost)</h3>
+                    <p class="text-slate-600">재고를 한 번 주문할 때마다 발생하는 고정 비용입니다. 주문을 자주 할수록(적은 양을 여러 번) 총 주문 비용은 증가합니다.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                    <h3 class="text-xl font-bold mb-2 flex items-center"><span class="text-2xl mr-3">📦</span>재고 유지 비용 (Holding Cost)</h3>
+                    <p class="text-slate-600">재고를 창고에 보관할 때 발생하는 비용입니다. 한 번에 많이 주문할수록(평균 재고량 증가) 총 재고 유지 비용은 증가합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="visualizer" class="mb-16 section-fade-in">
+            <h2 class="text-3xl font-bold mb-4 text-center">비용 관계 시각화 도구</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+                아래 슬라이더를 움직여 '1회 주문량'을 조절해보세요. 주문량에 따라 각 비용과 총비용이 어떻게 변하는지, 그리고 왜 특정 지점에서 총비용이 최소가 되는지 직접 확인할 수 있습니다.
+            </p>
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200">
+                <div class="chart-container mb-6">
+                    <canvas id="costChart"></canvas>
+                </div>
+                <div class="px-2">
+                    <label for="orderQuantitySlider" class="block font-bold mb-2 text-lg">1회 주문량 (Q) 조절:</label>
+                    <input id="orderQuantitySlider" type="range" min="100" max="4000" value="1000" step="50" class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer range-lg">
+                    <div class="flex justify-between text-sm text-slate-500 mt-1">
+                        <span>적게 주문</span>
+                        <span>많이 주문</span>
+                    </div>
+                </div>
+                <div id="costDisplay" class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-slate-500">현재 주문량</p>
+                        <p id="currentQ" class="text-2xl font-bold text-teal-600"></p>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-slate-500">연간 주문 비용</p>
+                        <p id="orderingCost" class="text-2xl font-bold text-blue-600"></p>
+                    </div>
+                     <div class="bg-slate-100 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-slate-500">연간 유지 비용</p>
+                        <p id="holdingCost" class="text-2xl font-bold text-amber-600"></p>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-slate-500">연간 총비용</p>
+                        <p id="totalCost" class="text-2xl font-bold text-red-600"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="mb-16 section-fade-in">
+            <h2 class="text-3xl font-bold mb-4 text-center">EOQ 계산기</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+                자신만의 데이터를 입력하여 경제적 주문수량을 직접 계산해보세요. 입력값에 따라 결과가 실시간으로 업데이트됩니다.
+            </p>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 space-y-6">
+                    <div>
+                        <label for="annualDemand" class="block text-lg font-medium mb-2">연간 수요량 (D)</label>
+                        <input type="number" id="annualDemand" value="10000" class="w-full p-3 border border-slate-300 rounded-lg text-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                    <div>
+                        <label for="orderCost" class="block text-lg font-medium mb-2">1회 주문 비용 (S)</label>
+                        <input type="number" id="orderCost" value="30000" class="w-full p-3 border border-slate-300 rounded-lg text-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                    <div>
+                        <label for="holdingCostPerUnit" class="block text-lg font-medium mb-2">단위당 연간 유지 비용 (H)</label>
+                        <input type="number" id="holdingCostPerUnit" value="600" class="w-full p-3 border border-slate-300 rounded-lg text-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition">
+                    </div>
+                </div>
+                <div class="bg-teal-600 text-white p-8 rounded-xl shadow-lg flex flex-col justify-center items-center text-center">
+                    <h3 class="text-xl font-bold mb-2 text-teal-100">계산 결과</h3>
+                    <p class="text-3xl sm:text-4xl font-bold mb-1" id="eoqResult">1,000</p>
+                    <p class="text-teal-200 mb-6">최적 주문량 (개)</p>
+                    
+                    <div class="w-full bg-teal-700 rounded-lg p-4">
+                        <p class="text-lg font-bold" id="orderFrequency">연간 10회 주문</p>
+                        <p class="text-sm text-teal-200">최적 주문 횟수</p>
+                    </div>
+
+                    <div class="w-full mt-4 text-sm grid grid-cols-2 gap-2 text-left bg-teal-500 p-3 rounded-lg">
+                        <p>주문비용:</p><p class="font-mono text-right" id="eoqOrderingCost"></p>
+                        <p>유지비용:</p><p class="font-mono text-right" id="eoqHoldingCost"></p>
+                        <hr class="col-span-2 border-teal-400 my-1">
+                        <p class="font-bold">총비용:</p><p class="font-mono font-bold text-right" id="eoqTotalCost"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="deep-dive" class="section-fade-in">
+            <h2 class="text-3xl font-bold mb-4 text-center">심화 학습</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+                EOQ 공식이 어떻게 유도되었는지, 그리고 어떤 가정과 한계를 가지고 있는지 알아보세요.
+            </p>
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="bg-white rounded-xl shadow-md border border-slate-200">
+                    <button id="derivation-toggle" class="w-full text-left p-6 font-bold text-xl flex justify-between items-center">
+                        EOQ 공식 유도 과정
+                        <span id="derivation-icon" class="transform transition-transform">▼</span>
+                    </button>
+                    <div id="derivation-content" class="hidden px-6 pb-6 border-t border-slate-200">
+                        <div class="prose max-w-none text-slate-600 mt-4">
+                            <p>총비용(TC)은 연간 주문비용과 연간 재고유지비용의 합입니다.</p>
+                            <p><code class="bg-slate-200 px-1 rounded">TC = (D/Q)S + (Q/2)H</code></p>
+                            <ol>
+                                <li><b>연간 주문비용:</b> (연간 수요량 D / 1회 주문량 Q) × 1회 주문비용 S</li>
+                                <li><b>연간 재고유지비용:</b> 평균 재고량 (Q/2) × 단위당 연간 재고유지비용 H</li>
+                            </ol>
+                            <p>이 TC 함수를 비용이 최소가 되는 Q에 대해 미분하여 0으로 놓고 풀면 EOQ 공식을 얻을 수 있습니다.</p>
+                            <p><code class="bg-slate-200 px-1 rounded">dTC/dQ = -DS/Q² + H/2 = 0</code></p>
+                            <p>정리하면, <code class="bg-slate-200 px-1 rounded">Q² = 2DS/H</code> 가 되어 최종 공식이 도출됩니다.</p>
+                            <p class="font-bold text-lg text-center mt-4">
+                                Q* = &radic;<span style="text-decoration: overline;">&nbsp;2DS / H&nbsp;</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-xl shadow-md border border-slate-200 p-6">
+                    <h3 class="font-bold text-xl mb-3">모델의 가정과 한계점</h3>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li>수요가 연중 일정하고 예측 가능하다고 가정합니다.</li>
+                        <li>주문비용과 재고유지비용이 고정되어 변하지 않는다고 가정합니다.</li>
+                        <li>주문한 물품은 리드타임 없이 즉시 입고된다고 가정합니다.</li>
+                        <li>대량 구매에 따른 가격 할인이 없다고 가정합니다.</li>
+                        <li class="pt-2 text-sm text-slate-500">※ 실제 환경에서는 이러한 불확실성에 대응하기 위해 안전 재고, 재주문점 등의 기법과 함께 사용됩니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-6 text-sm text-slate-500 border-t mt-12">
+        <p>&copy; 2025 Interactive EOQ Guide. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const D_vis = 10000;
+            const S_vis = 30000;
+            const H_vis = 600;
+
+            const slider = document.getElementById('orderQuantitySlider');
+            const currentQDisplay = document.getElementById('currentQ');
+            const orderingCostDisplay = document.getElementById('orderingCost');
+            const holdingCostDisplay = document.getElementById('holdingCost');
+            const totalCostDisplay = document.getElementById('totalCost');
+
+            const ctx = document.getElementById('costChart').getContext('2d');
+            let costChart;
+
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(value);
+            }
+            
+            function formatNumber(value) {
+                return new Intl.NumberFormat('ko-KR').format(value);
+            }
+
+            function createChart() {
+                const labels = [];
+                const range = slider.max - slider.min;
+                for (let i = 0; i <= range; i += 100) {
+                    labels.push(parseInt(slider.min) + i);
+                }
+
+                const orderingCostData = labels.map(q => (D_vis / q) * S_vis);
+                const holdingCostData = labels.map(q => (q / 2) * H_vis);
+                const totalCostData = labels.map((q, index) => orderingCostData[index] + holdingCostData[index]);
+                const eoqPoint = Math.sqrt((2 * D_vis * S_vis) / H_vis);
+                
+                costChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '연간 주문 비용',
+                                data: orderingCostData,
+                                borderColor: 'rgb(59, 130, 246)',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                tension: 0.3,
+                                borderWidth: 2,
+                                pointRadius: 0
+                            },
+                            {
+                                label: '연간 유지 비용',
+                                data: holdingCostData,
+                                borderColor: 'rgb(217, 119, 6)',
+                                backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                                tension: 0.3,
+                                borderWidth: 2,
+                                pointRadius: 0
+                            },
+                            {
+                                label: '연간 총비용',
+                                data: totalCostData,
+                                borderColor: 'rgb(220, 38, 38)',
+                                backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                                tension: 0.3,
+                                borderWidth: 3,
+                                pointRadius: 0
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += formatCurrency(context.parsed.y);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                            legend: {
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: '1회 주문량 (Q)'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: '연간 비용 (원)'
+                                },
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return formatCurrency(value);
+                                    }
+                                }
+                            }
+                        },
+                        annotation: {
+                            annotations: {
+                                line1: {
+                                    type: 'line',
+                                    xMin: eoqPoint,
+                                    xMax: eoqPoint,
+                                    borderColor: 'rgb(22, 163, 74)',
+                                    borderWidth: 2,
+                                    borderDash: [6, 6],
+                                    label: {
+                                        content: `EOQ: ${formatNumber(eoqPoint.toFixed(0))}`,
+                                        enabled: true,
+                                        position: 'start',
+                                        backgroundColor: 'rgba(22, 163, 74, 0.8)',
+                                        font: {
+                                          weight: 'bold'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            function updateVisualizer(q) {
+                const currentQ = parseInt(q);
+                const orderCost = (D_vis / currentQ) * S_vis;
+                const holdCost = (currentQ / 2) * H_vis;
+                const totCost = orderCost + holdCost;
+
+                currentQDisplay.textContent = `${formatNumber(currentQ)}개`;
+                orderingCostDisplay.textContent = formatCurrency(orderCost);
+                holdingCostDisplay.textContent = formatCurrency(holdCost);
+                totalCostDisplay.textContent = formatCurrency(totCost);
+            }
+
+            slider.addEventListener('input', (e) => {
+                updateVisualizer(e.target.value);
+            });
+            
+            createChart();
+            updateVisualizer(slider.value);
+
+            const annualDemandInput = document.getElementById('annualDemand');
+            const orderCostInput = document.getElementById('orderCost');
+            const holdingCostPerUnitInput = document.getElementById('holdingCostPerUnit');
+            const eoqResultDisplay = document.getElementById('eoqResult');
+            const orderFrequencyDisplay = document.getElementById('orderFrequency');
+            const eoqOrderingCostDisplay = document.getElementById('eoqOrderingCost');
+            const eoqHoldingCostDisplay = document.getElementById('eoqHoldingCost');
+            const eoqTotalCostDisplay = document.getElementById('eoqTotalCost');
+
+            function calculateAndDisplayEOQ() {
+                const D = parseFloat(annualDemandInput.value) || 0;
+                const S = parseFloat(orderCostInput.value) || 0;
+                const H = parseFloat(holdingCostPerUnitInput.value) || 0;
+
+                if (D > 0 && S > 0 && H > 0) {
+                    const eoq = Math.sqrt((2 * D * S) / H);
+                    const orderFreq = D / eoq;
+                    
+                    const ordCost = (D/eoq) * S;
+                    const hldCost = (eoq/2) * H;
+                    const ttlCost = ordCost + hldCost;
+
+                    eoqResultDisplay.textContent = formatNumber(eoq.toFixed(0));
+                    orderFrequencyDisplay.textContent = `연간 ${orderFreq.toFixed(2)}회 주문`;
+                    eoqOrderingCostDisplay.textContent = formatCurrency(ordCost);
+                    eoqHoldingCostDisplay.textContent = formatCurrency(hldCost);
+                    eoqTotalCostDisplay.textContent = formatCurrency(ttlCost);
+
+                } else {
+                    eoqResultDisplay.textContent = '---';
+                    orderFrequencyDisplay.textContent = '---';
+                    eoqOrderingCostDisplay.textContent = '---';
+                    eoqHoldingCostDisplay.textContent = '---';
+                    eoqTotalCostDisplay.textContent = '---';
+                }
+            }
+
+            [annualDemandInput, orderCostInput, holdingCostPerUnitInput].forEach(input => {
+                input.addEventListener('input', calculateAndDisplayEOQ);
+            });
+            
+            calculateAndDisplayEOQ();
+
+            const derivationToggle = document.getElementById('derivation-toggle');
+            const derivationContent = document.getElementById('derivation-content');
+            const derivationIcon = document.getElementById('derivation-icon');
+
+            derivationToggle.addEventListener('click', () => {
+                const isHidden = derivationContent.classList.toggle('hidden');
+                derivationIcon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
