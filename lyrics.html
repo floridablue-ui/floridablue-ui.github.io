@@ -78,7 +78,6 @@
             const toastEl = document.getElementById('toast-notification');
             const dictKeys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
 
-            // Improved highlighting algorithm to prevent nesting
             const parseAndHighlightText = (text) => {
                 let result = '';
                 let i = 0;
@@ -147,9 +146,16 @@
                 popupEl.querySelector('#popup-meaning').textContent = def.meaning;
                 popupEl.style.display = 'block';
                 const popupRect = popupEl.getBoundingClientRect();
-                let top = rect.bottom + 8;
+
+                // ** CHANGED: Default position is now ABOVE the element **
+                let top = rect.top - popupRect.height - 8;
                 let left = rect.left + rect.width / 2 - popupRect.width / 2;
-                if (top + popupRect.height > window.innerHeight) top = rect.top - popupRect.height - 8;
+                
+                // If it goes off the top of the viewport, move it below.
+                if (top < 0) {
+                    top = rect.bottom + 8;
+                }
+
                 if (left < 0) left = 8;
                 if (left + popupRect.width > window.innerWidth) left = window.innerWidth - popupRect.width - 8;
                 popupEl.style.left = `${left}px`;
@@ -180,15 +186,22 @@
                     return;
                 }
                 
+                // ** CHANGED: New logic for word clicks **
                 if (target.classList.contains('dict-word')) {
                     e.preventDefault();
                     const lyricBlock = target.closest('.lyric-block');
-                    if (!lyricBlock.classList.contains('active')) {
+                    
+                    // If translation is already visible, show popup.
+                    if (lyricBlock.classList.contains('active')) {
+                        showPopup(target.dataset.word, dictionary[target.dataset.word], target);
+                    } 
+                    // If translation is hidden, just open it (don't show popup yet).
+                    else {
                         document.querySelectorAll('.lyric-block.active').forEach(b => b.classList.remove('active'));
                         lyricBlock.classList.add('active');
+                        hidePopup(); // Hide any other open popup
                     }
-                    showPopup(target.dataset.word, dictionary[target.dataset.word], target);
-                    return;
+                    return; // Stop event from bubbling to lyric-line
                 }
 
                 const lyricLine = target.closest('.chinese-lyric');
@@ -196,11 +209,16 @@
                     e.preventDefault();
                     const lyricBlock = lyricLine.closest('.lyric-block');
                     const isActive = lyricBlock.classList.contains('active');
-                    if(!target.classList.contains('dict-word') && !isActive){
+                    
+                    // Show unregistered word toast only when opening a translation
+                    if (!isActive && target === lyricLine) {
                        showToast("사전에 등록되지 않은 단어입니다.");
                     }
+                    
                     document.querySelectorAll('.lyric-block.active').forEach(b => b.classList.remove('active'));
-                    if (!isActive) lyricBlock.classList.add('active');
+                    if (!isActive) {
+                        lyricBlock.classList.add('active');
+                    }
                     hidePopup();
                 }
             };
