@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[개선판] 맞춤 진통제 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Green, Neutral Tones, with Red/Yellow for warnings -->
+    <!-- Application Structure Plan: Version 2.0. This app is now a personalized decision-support tool. The structure is rebuilt to guide users from self-identification to a safe choice. 1) Personalized Guide: Interactive questions immediately classify the user and provide a tailored, high-level recommendation. This is the new entry point. 2) At-a-Glance Table: A quick, visual summary reinforces the recommendation. 3) Detailed Tabs: For users who want to understand the 'why' behind the recommendation. 4) Risk Chart: A visual deep-dive. 5) Actionable Checklist & Emergency Section: Clear final steps and critical warnings. This top-down funnel structure (Personalized -> Summary -> Detail -> Action) is designed to provide answers fast while still offering depth, dramatically improving usability for the target audience. -->
+    <!-- Visualization & Content Choices: 
+        - Improvement 1 (Personalization): Implemented with radio button inputs and dynamic JS logic to show/hide recommendation divs. This directly answers the user's primary implicit question: "What is safe *for me*?".
+        - Improvement 2 (Comparison Table): A static HTML table with emoji icons (✅, ❗, ❌) serves as an immediate, easy-to-scan reference, supporting the personalized recommendation.
+        - Improvement 3 (Practicality): Added common brand names to tab titles and created a highly visible, red-themed "Emergency Signals" div with a prominent icon (🚨) to increase real-world utility and safety.
+        - Kept original chart and tab structure as they provide valuable, layered detail for users seeking more information. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .tab-button.active {
+            border-color: #10B981;
+            background-color: #10B981;
+            color: white;
+            font-weight: 700;
+        }
+        .drug-section { display: none; }
+        .drug-section.active { display: block; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 450px;
+            max-height: 60vh;
+        }
+        .recommendation-box { display: none; }
+        .recommendation-box.visible { display: block; }
+        .radio-label {
+            border: 2px solid #D1D5DB;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        input[type="radio"]:checked + .radio-label {
+            border-color: #10B981;
+            background-color: #D1FAE5;
+            color: #065F46;
+            font-weight: bold;
+        }
+         @media (max-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">고혈압·공황장애 환자를 위한<br class="md:hidden"> 맞춤 진통제 가이드</h1>
+            <p class="text-lg md:text-xl text-emerald-600 mt-2 font-medium">내게 맞는 가장 안전한 선택 찾기</p>
+        </header>
+
+        <main class="space-y-12">
+            
+            <!-- 1. 사용자 맞춤형 진단 가이드 -->
+            <section id="personalized-guide" class="bg-emerald-50 p-6 rounded-xl shadow-lg border border-emerald-200">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-700">나에게 맞는 진통제 찾기</h2>
+                <p class="mb-6 text-gray-700">아래 두 가지 질문에 답변하시면, 현재 상황에 가장 안전한 진통제를 추천해 드립니다.</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <p class="font-semibold text-lg mb-3 text-gray-800">Q1. 현재 고혈압 약을 복용 중이신가요?</p>
+                        <div class="flex gap-4" id="hypertension-q">
+                            <input type="radio" name="hypertension" id="ht-yes" value="yes" class="sr-only">
+                            <label for="ht-yes" class="radio-label">예</label>
+                            <input type="radio" name="hypertension" id="ht-no" value="no" class="sr-only">
+                            <label for="ht-no" class="radio-label">아니오</label>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-lg mb-3 text-gray-800">Q2. 공황장애 등으로 항우울제(SSRI)를 복용 중이신가요?</p>
+                        <div class="flex gap-4" id="ssri-q">
+                            <input type="radio" name="ssri" id="ssri-yes" value="yes" class="sr-only">
+                            <label for="ssri-yes" class="radio-label">예</label>
+                            <input type="radio" name="ssri" id="ssri-no" value="no" class="sr-only">
+                            <label for="ssri-no" class="radio-label">아니오</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="recommendation-result" class="mt-6">
+                    <div id="rec-default" class="recommendation-box visible p-4 bg-gray-100 rounded-lg text-center text-gray-600">
+                        <p>위 질문에 답변하시면 맞춤 추천을 볼 수 있습니다.</p>
+                    </div>
+                    <div id="rec-both-yes" class="recommendation-box p-4 bg-red-100 border-l-4 border-red-500 rounded-r-lg">
+                        <h3 class="text-xl font-bold text-red-800">결과: 고위험군</h3>
+                        <p class="mt-2 text-red-700"><strong>타이레놀(아세트아미노펜)</strong>을 최우선으로 고려하세요. 다른 소염진통제(NSAIDs)는 혈압약 효과를 감소시키고 위장출혈 위험을 매우 높여 <strong class="underline">원칙적으로 피해야 합니다.</strong></p>
+                    </div>
+                     <div id="rec-ht-yes" class="recommendation-box p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded-r-lg">
+                        <h3 class="text-xl font-bold text-yellow-800">결과: 주의군 (고혈압)</h3>
+                        <p class="mt-2 text-yellow-700"><strong>타이레놀(아세트아미노펜)</strong>이 가장 안전합니다. 다른 소염진통제(NSAIDs)는 혈압을 높일 수 있으므로, 복용해야 한다면 최단기간만 사용하세요.</p>
+                    </div>
+                    <div id="rec-ssri-yes" class="recommendation-box p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded-r-lg">
+                        <h3 class="text-xl font-bold text-yellow-800">결과: 주의군 (SSRI 복용)</h3>
+                        <p class="mt-2 text-yellow-700"><strong>타이레놀(아세트아미노펜)</strong>이 가장 안전합니다. 다른 소염진통제(NSAIDs)는 위장출혈 위험을 크게 높이므로, 복용 시 반드시 전문가와 상의하세요.</p>
+                    </div>
+                    <div id="rec-both-no" class="recommendation-box p-4 bg-green-100 border-l-4 border-green-500 rounded-r-lg">
+                        <h3 class="text-xl font-bold text-green-800">결과: 저위험군</h3>
+                        <p class="mt-2 text-green-700">비교적 선택이 자유롭습니다. 통증의 종류(염증 동반 여부 등)에 따라 적절한 약을 선택할 수 있습니다. 아래 비교표와 상세정보를 확인해보세요.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 한눈에 보는 핵심 비교표 -->
+            <section id="summary-table" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">한눈에 보는 핵심 비교표</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm md:text-base text-left">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-3">특징</th>
+                                <th class="p-3 text-center">타이레놀</th>
+                                <th class="p-3 text-center">이부프로펜</th>
+                                <th class="p-3 text-center">나프록센</th>
+                                <th class="p-3 text-center">아스피린</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr>
+                                <td class="p-3 font-semibold">고혈압약 영향</td>
+                                <td class="p-3 text-center text-lg">✅<span class="sr-only">낮음</span></td>
+                                <td class="p-3 text-center text-lg">❗<span class="sr-only">높음</span></td>
+                                <td class="p-3 text-center text-lg">❗<span class="sr-only">높음</span></td>
+                                <td class="p-3 text-center text-lg">❗<span class="sr-only">높음</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold">SSRI와 상호작용</td>
+                                <td class="p-3 text-center text-lg">✅<span class="sr-only">없음</span></td>
+                                <td class="p-3 text-center text-lg">❌<span class="sr-only">매우 높음</span></td>
+                                <td class="p-3 text-center text-lg">❗<span class="sr-only">높음</span></td>
+                                <td class="p-3 text-center text-lg">❌<span class="sr-only">매우 높음</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold">위장 자극</td>
+                                <td class="p-3 text-center text-lg">✅<span class="sr-only">낮음</span></td>
+                                <td class="p-3 text-center text-lg">❗<span class="sr-only">높음</span></td>
+                                <td class="p-3 text-center text-lg">❗<span class="sr-only">매우 높음</span></td>
+                                <td class="p-3 text-center text-lg">❌<span class="sr-only">매우 높음</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold">소염 효과</td>
+                                <td class="p-3 text-center">없음</td>
+                                <td class="p-3 text-center">중간</td>
+                                <td class="p-3 text-center">강함</td>
+                                <td class="p-3 text-center">중간</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-right mt-2 text-gray-500">✅: 안전/해당없음, ❗: 주의필요, ❌: 위험/금기</p>
+                </div>
+            </section>
+            
+            <!-- 3. 진통제별 상세 비교 -->
+            <section id="comparison" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">진통제별 상세 정보</h2>
+                <div class="mb-6 border-b border-gray-200">
+                    <nav class="-mb-px flex flex-wrap gap-2 md:gap-4" aria-label="Tabs">
+                        <button class="tab-button active shrink-0 border-b-2 font-medium px-3 py-2 md:px-4 text-sm md:text-base rounded-t-md" data-target="drug-tylenol">타이레놀</button>
+                        <button class="tab-button shrink-0 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium px-3 py-2 md:px-4 text-sm md:text-base rounded-t-md" data-target="drug-ibuprofen">이부프로펜</button>
+                        <button class="tab-button shrink-0 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium px-3 py-2 md:px-4 text-sm md:text-base rounded-t-md" data-target="drug-naproxen">나프록센</button>
+                        <button class="tab-button shrink-0 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium px-3 py-2 md:px-4 text-sm md:text-base rounded-t-md" data-target="drug-aspirin">아스피린</button>
+                    </nav>
+                </div>
+
+                <div class="space-y-6">
+                    <div id="drug-tylenol" class="drug-section active">
+                        <h3 class="text-2xl font-semibold mb-4 text-emerald-700">아세트아미노펜 <span class="text-lg font-normal text-gray-500">(상품명: 타이레놀 등)</span></h3>
+                         <div class="space-y-4">
+                            <p>❤ <strong class="text-lg">고혈압 환자:</strong> 고혈압약 효과에 거의 영향을 주지 않아 1차 선택지로 권장됩니다. </p>
+                            <p>💊 <strong class="text-lg">공황장애 약물 상호작용:</strong> 항우울제(SSRI)나 항불안제(벤조디아제핀)와 특별한 상호작용이 없어 안전하게 병용 가능합니다.</p>
+                            <p>🚫 <strong class="text-lg">절대 금기:</strong> <span class="font-semibold text-red-600">중증 간질환 환자, 매일 3잔 이상 음주자.</span> 과량 복용 시 심각한 간 손상을 유발할 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div id="drug-ibuprofen" class="drug-section">
+                        <h3 class="text-2xl font-semibold mb-4 text-amber-600">이부프로펜 <span class="text-lg font-normal text-gray-500">(상품명: 애드빌, 부루펜 등)</span></h3>
+                        <div class="space-y-4">
+                           <p>💔 <strong class="text-lg">고혈압 환자:</strong> 혈압을 높이고, ACE억제제/ARB/이뇨제 등 고혈압약의 효과를 감소시킬 수 있습니다.</p>
+                            <p>💊 <strong class="text-lg">공황장애 약물 상호작용:</strong> 항우울제(SSRI)와 함께 복용 시 <span class="font-semibold text-red-600">위장출혈 위험이 매우 증가</span>하므로 주의해야 합니다.</p>
+                            <p>🚫 <strong class="text-lg">절대 금기:</strong> 아스피린 천식, 활동성 위궤양, 중증 심장/신장 질환, 임신 30주 이후 임부.</p>
+                        </div>
+                    </div>
+                    <div id="drug-naproxen" class="drug-section">
+                         <h3 class="text-2xl font-semibold mb-4 text-amber-600">나프록센 <span class="text-lg font-normal text-gray-500">(상품명: 탁센, 낙센 등)</span></h3>
+                         <div class="space-y-4">
+                           <p>💔 <strong class="text-lg">고혈압 환자:</strong> 혈압을 높이고 고혈압약 효과를 감소시킵니다. "Triple Whammy"(NSAID+ACEi/ARB+이뇨제) 병용은 급성 신부전 위험이 매우 높습니다.</p>
+                            <p>💊 <strong class="text-lg">공황장애 약물 상호작용:</strong> 항우울제(SSRI)와 함께 복용 시 위장출혈 위험이 크게 증가합니다.</p>
+                            <p>🚫 <strong class="text-lg">절대 금기:</strong> NSAID 과민증, 활동성 위궤양, 중증 심장/신장/간 질환, 임신 30주 이후 임부.</p>
+                        </div>
+                    </div>
+                    <div id="drug-aspirin" class="drug-section">
+                        <h3 class="text-2xl font-semibold mb-4 text-red-600">아스피린 - <span class="text-lg font-medium">진통 목적 비권장</span></h3>
+                        <div class="space-y-4">
+                            <p>💔 <strong class="text-lg">고혈압 환자:</strong> 진통 목적 고용량 복용 시 혈압을 높일 수 있습니다. 조절되지 않는 고혈압 환자는 뇌출혈 위험이 증가합니다.</p>
+                            <p>💊 <strong class="text-lg">공황장애 약물 상호작용:</strong> 항우울제(SSRI)와 병용 시 <span class="font-semibold text-red-600">위장출혈 및 뇌출혈 위험까지 증가</span>시킬 수 있어 특히 위험합니다.</p>
+                            <p>🚫 <strong class="text-lg">절대 금기:</strong> <span class="font-semibold text-red-600">19세 미만(레이 증후군 위험)</span>, 아스피린 천식, 출혈성 질환, 임신 3기.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 위험도 비교 차트 -->
+            <section id="risk-chart-section" class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">진통제별 핵심 위험도 비교 차트</h2>
+                <div class="chart-container">
+                    <canvas id="riskChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 5. 안전 복용 체크리스트 및 응급 신호 -->
+            <section id="checklist" class="space-y-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-800">안전 복용 최종 체크리스트</h2>
+                     <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-3 bg-emerald-50 rounded-lg">
+                           <span class="text-2xl pt-1">1️⃣</span>
+                           <div><h3 class="font-bold text-lg text-emerald-800">1차 선택은 아세트아미노펜</h3><p class="text-gray-700 mt-1">상호작용 위험이 가장 적습니다. 통증 조절이 안 될 때만 다른 약을 고려하세요.</p></div>
+                        </div>
+                        <div class="flex items-start gap-4 p-3 bg-amber-50 rounded-lg">
+                           <span class="text-2xl pt-1">⏳</span>
+                           <div><h3 class="font-bold text-lg text-amber-800">NSAIDs는 최단기간, 최소용량</h3><p class="text-gray-700 mt-1">이부프로펜, 나프록센 등은 필요한 만큼만 가장 짧게 복용하세요.</p></div>
+                        </div>
+                        <div class="flex items-start gap-4 p-3 bg-amber-50 rounded-lg">
+                           <span class="text-2xl pt-1">🍔</span>
+                           <div><h3 class="font-bold text-lg text-amber-800">NSAIDs는 반드시 식사 직후에</h3><p class="text-gray-700 mt-1">위장장애 위험을 줄여줍니다.</p></div>
+                        </div>
+                         <div class="flex items-start gap-4 p-3 bg-red-50 rounded-lg">
+                           <span class="text-2xl pt-1">🚫</span>
+                           <div><h3 class="font-bold text-lg text-red-800">두 종류 이상 진통제 동시 복용 금지</h3><p class="text-gray-700 mt-1">부작용 위험만 커집니다.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="emergency-signals" class="bg-red-100 border-2 border-dashed border-red-500 p-6 rounded-xl shadow-lg">
+                     <h2 class="text-2xl font-bold mb-4 text-red-800 flex items-center gap-3">🚨 응급 신호!</h2>
+                     <p class="text-red-700 mb-4">아래와 같은 증상이 나타나면 즉시 약 복용을 중단하고 의사 또는 약사와 상의하세요!</p>
+                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 font-semibold text-red-900">
+                        <li>• 극심하거나 지속적인 복통</li>
+                        <li>• 검은색 변 또는 혈변</li>
+                        <li>• 갑작스러운 가슴 통증, 숨가쁨</li>
+                        <li>• 얼굴, 입술, 혀의 부기</li>
+                        <li>• 심한 어지러움, 정신 혼미</li>
+                        <li>• 심한 피부 발진이나 물집</li>
+                     </ul>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 pt-6 border-t">
+            <p class="text-sm text-gray-500">본 정보는 일반적인 정보 제공을 목적으로 하며, 전문적인 의학적 진단이나 조언을 대체할 수 없습니다.</p>
+            <p class="text-sm text-gray-500 mt-1">의약품 복용 전에는 반드시 의사 또는 약사와 상의하십시오.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const drugSections = document.querySelectorAll('.drug-section');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.target;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    drugSections.forEach(section => {
+                        section.classList.toggle('active', section.id === targetId);
+                    });
+                });
+            });
+
+            // Personalized Guide Logic
+            const htRadio = document.querySelectorAll('input[name="hypertension"]');
+            const ssriRadio = document.querySelectorAll('input[name="ssri"]');
+            const recBoxes = document.querySelectorAll('.recommendation-box');
+
+            function updateRecommendation() {
+                const htValue = document.querySelector('input[name="hypertension"]:checked')?.value;
+                const ssriValue = document.querySelector('input[name="ssri"]:checked')?.value;
+
+                recBoxes.forEach(box => box.classList.remove('visible'));
+
+                if (!htValue || !ssriValue) {
+                    document.getElementById('rec-default').classList.add('visible');
+                    return;
+                }
+
+                if (htValue === 'yes' && ssriValue === 'yes') {
+                    document.getElementById('rec-both-yes').classList.add('visible');
+                } else if (htValue === 'yes') {
+                    document.getElementById('rec-ht-yes').classList.add('visible');
+                } else if (ssriValue === 'yes') {
+                    document.getElementById('rec-ssri-yes').classList.add('visible');
+                } else {
+                    document.getElementById('rec-both-no').classList.add('visible');
+                }
+            }
+
+            htRadio.forEach(radio => radio.addEventListener('change', updateRecommendation));
+            ssriRadio.forEach(radio => radio.addEventListener('change', updateRecommendation));
+
+            // Chart.js Logic
+            const ctx = document.getElementById('riskChart').getContext('2d');
+            const riskData = {
+                labels: ['타이레놀', '이부프로펜', '나프록센', '아스피린'],
+                datasets: [
+                    {
+                        label: '위장장애 위험',
+                        data: [1, 7, 8, 9],
+                        backgroundColor: 'rgba(245, 158, 11, 0.6)',
+                        borderColor: 'rgba(245, 158, 11, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '심혈관 위험 (혈압상승 등)',
+                        data: [2, 7, 6, 5],
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '출혈 위험 (SSRI 병용 시)',
+                        data: [1, 8, 8, 10],
+                        backgroundColor: 'rgba(129, 140, 248, 0.6)',
+                        borderColor: 'rgba(129, 140, 248, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            const riskChart = new Chart(ctx, {
+                type: 'bar',
+                data: riskData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: false,
+                            beginAtZero: true,
+                            max: 10,
+                            title: { display: true, text: '상대적 위험도 (높을수록 위험)' },
+                            ticks: { stepSize: 2 }
+                        },
+                        y: { stacked: false }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) { label += ': '; }
+                                    const value = context.parsed.x;
+                                    let riskLevel = '';
+                                    if (value <= 2) riskLevel = '낮음';
+                                    else if (value <= 7) riskLevel = '중간';
+                                    else riskLevel = '높음';
+                                    label += `${riskLevel} (${value}/10)`;
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: { position: 'top' },
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
