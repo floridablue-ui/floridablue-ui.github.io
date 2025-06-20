@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피로 회복의 과학: 임상 영양학적 접근</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .section-title {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .pro-tip {
+            border-left: 4px solid #185a9d;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800">
+                <a href="#hero">피로 회복의 과학</a>
+            </div>
+            <div class="hidden md:flex space-x-6 items-center text-sm font-medium">
+                <a href="#intro" class="text-gray-600 hover:text-blue-600 transition-colors">피로의 기전</a>
+                <a href="#arginine" class="text-gray-600 hover:text-blue-600 transition-colors">아르기닌</a>
+                <a href="#glutamine" class="text-gray-600 hover:text-blue-600 transition-colors">글루타민</a>
+                <a href="#synergy" class="text-gray-600 hover:text-blue-600 transition-colors">시너지 성분</a>
+                <a href="#strategy" class="bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-900 transition-colors">최적화 프로토콜</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#intro" class="block py-2 text-gray-600 hover:text-blue-600">피로의 기전</a>
+            <a href="#arginine" class="block py-2 text-gray-600 hover:text-blue-600">아르기닌</a>
+            <a href="#glutamine" class="block py-2 text-gray-600 hover:text-blue-600">글루타민</a>
+            <a href="#synergy" class="block py-2 text-gray-600 hover:text-blue-600">시너지 성분</a>
+            <a href="#strategy" class="block mt-2 bg-gray-800 text-white text-center px-4 py-2 rounded-full hover:bg-gray-900">최적화 프로토콜</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative bg-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 leading-tight">
+                    만성 피로와 번아웃을 위한<br class="hidden md:block">
+                    <span class="section-title">임상 영양학적 접근</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    피로를 유발하는 핵심 생화학적 기전을 이해하고, 과학적 근거에 기반한 영양소 조합을 통해 신체 시스템을 최적화하십시오.
+                </p>
+                <a href="#intro" class="bg-gray-800 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-900 transition-transform transform hover:scale-105">
+                    핵심 기전 알아보기
+                </a>
+            </div>
+        </section>
+
+        <!-- Intro to Fatigue -->
+        <section id="intro" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">피로의 생리학적 기전 (Pathophysiology of Fatigue)</h2>
+                    <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                        피로는 단순한 감각이 아닌, 에너지 대사, 신경 전달, 염증 반응의 균형이 무너질 때 발생하는 복합적인 생리적 현상입니다.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Central Fatigue -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">1. 중추성 피로 (Central Fatigue)</h3>
+                        <p class="text-gray-700 mb-4">중추신경계(뇌) 수준에서 발생하는 피로로, 동기 부여 감소와 인지 기능 저하를 유발합니다.</p>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex"><span class="font-bold text-blue-700 mr-2 w-28 shrink-0">신경전달물질 불균형:</span><div><span class="font-semibold text-gray-800">세로토닌-도파민 비율</span>이 증가하면 피로감이 상승합니다. 운동 중 BCAA가 고갈되면, 혈중 트립토판(세로토닌 전구체)의 뇌 유입이 증가하여 이 비율이 깨집니다.</div></li>
+                            <li class="flex"><span class="font-bold text-blue-700 mr-2 w-28 shrink-0">암모니아 독성:</span><div>고강도 운동으로 생성된 암모니아가 혈뇌장벽(BBB)을 통과하면 뇌의 에너지 대사를 방해하고, 신경전달물질인 글루타메이트-글루타민 순환을 교란시켜 신경 독성을 유발합니다.</div></li>
+                             <li class="flex"><span class="font-bold text-blue-700 mr-2 w-28 shrink-0">신경 염증:</span><div>과도한 신체 활동은 전신 염증 반응을 일으키고, 사이토카인(TNF-α, IL-1β)이 뇌에 작용하여 '질병 행동(sickness behavior)'과 유사한 무기력증과 피로를 유발합니다.</div></li>
+                        </ul>
+                    </div>
+                    <!-- Peripheral Fatigue -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">2. 말초성 피로 (Peripheral Fatigue)</h3>
+                        <p class="text-gray-700 mb-4">근육 자체 또는 근신경 접합부에서 발생하는 피로로, 근력 및 근지구력 저하가 특징입니다.</p>
+                         <ul class="space-y-3 text-gray-600">
+                            <li class="flex"><span class="font-bold text-green-700 mr-2 w-28 shrink-0">에너지원 고갈:</span><div>순간적인 힘을 내는 <span class="font-semibold text-gray-800">ATP-PCr 시스템</span>의 인산크레아틴(PCr)과, 지속적인 에너지 공급원인 <span class="font-semibold text-gray-800">근 글리코겐</span>이 고갈되면 ATP 재합성 속도가 급격히 저하됩니다.</div></li>
+                            <li class="flex"><span class="font-bold text-green-700 mr-2 w-28 shrink-0">대사산물 축적:</span><div>무산소성 해당과정의 부산물인 <span class="font-semibold text-gray-800">수소이온(H+)</span>은 근육 내 pH를 감소시켜 PFK, Phosphorylase 등 핵심 효소의 활성을 저해하고, 칼슘과 트로포닌의 결합을 방해하여 근수축을 약화시킵니다.</div></li>
+                            <li class="flex"><span class="font-bold text-green-700 mr-2 w-28 shrink-0">EIMD 및 염증:</span><div>운동 유발성 근손상(EIMD)은 근초막(sarcolemma)을 파괴하고, 이는 칼슘이온의 비정상적 유입과 칼파인(protease) 활성화를 통해 근섬유를 손상시킵니다. 이후 호중구, 대식세포가 침투하며 염증 반응이 발생하고 지연성 근육통(DOMS)을 유발합니다.</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Arginine Section -->
+        <section id="arginine" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold tracking-wider">ENDOTHELIAL & METABOLIC REGULATOR</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">L-Arginine: 혈관내피 기능과 암모니아 대사의 핵심</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        L-아르기닌은 혈류 역학과 독성 대사산물 처리에 직접 관여하는 두 가지 핵심 생화학 경로의 필수 기질(substrate)로 작용합니다.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- NO Pathway -->
+                    <div class="bg-gray-50 p-8 rounded-lg border">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">산화질소(NO) 합성 경로</h3>
+                        <p class="text-gray-600 mb-4">혈관내피세포의 eNOS(endothelial Nitric Oxide Synthase) 효소에 의해 아르기닌은 산화질소(NO)와 시트룰린으로 전환됩니다. 생성된 NO는 혈관 평활근 세포의 Guanylate Cyclase를 활성화시켜 cGMP 생성을 촉진, 혈관을 이완 및 확장시킵니다. 이는 다음을 의미합니다:</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>산소 및 영양소 공급 증가:</strong> 활동 중인 근육으로의 혈류량이 증가하여 효율적인 에너지 생성을 지원합니다.</li>
+                            <li><strong>대사산물 제거 촉진:</strong> 젖산, 암모니아 등 피로 유발 물질을 신속하게 혈류에서 제거합니다.</li>
+                            <li><strong>미토콘드리아 생합성 촉진:</strong> PGC-1α를 활성화하여 장기적으로 에너지 생산 능력을 향상시킬 수 있습니다.</li>
+                        </ul>
+                    </div>
+                    <!-- Urea Cycle -->
+                    <div class="bg-gray-50 p-8 rounded-lg border">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">요소 회로 (Urea Cycle)</h3>
+                        <p class="text-gray-600 mb-4">간의 미토콘드리아와 세포질에서 일어나는 요소 회로는 단백질 및 아미노산 대사의 필연적 부산물인 암모니아(NH₃)를 해독하는 유일한 경로입니다. 아르기닌은 이 회로의 핵심 중간체입니다.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                           <li><strong>암모니아의 신경독성 방어:</strong> 요소 회로는 중추신경계 피로의 주범인 암모니아를 독성이 없는 요소(Urea)로 전환하여 소변으로 배출시킵니다.</li>
+                           <li><strong>회로 기능 유지:</strong> 체내 아르기닌 수치가 충분해야 요소 회로가 원활하게 작동하며, 특히 고단백 식단이나 격렬한 운동 시 중요성이 부각됩니다.</li>
+                        </ul>
+                        <div class="mt-4 p-4 bg-blue-50 border-blue-200 pro-tip">
+                            <p class="text-sm text-blue-800"><span class="font-bold">임상적 팁:</span> 시트룰린은 간의 초회 통과 대사(first-pass metabolism)를 거치지 않고 신장에서 아르기닌으로 전환되므로, 혈중 아르기닌 농도를 높이는 데 더 효율적일 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Glutamine Section -->
+        <section id="glutamine" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <span class="text-green-600 font-semibold tracking-wider">IMMUNE & GASTROINTESTINAL SUPPORT</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">L-Glutamine: 면역, 장, 근육 항상성 조절자</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                       L-글루타민은 체내 가장 풍부한 조건부 필수 아미노산으로, 스트레스 상황에서 면역 세포, 장내 상피세포, 근육세포의 기능 유지에 필수적입니다.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Immune Fuel -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <h3 class="text-lg font-bold mb-2">면역세포의 주 에너지원</h3>
+                        <p class="text-sm text-gray-600">림프구, 대식세포와 같은 면역세포는 포도당보다 글루타민을 주요 에너지원으로 사용합니다. 글루타민은 이 세포들의 빠른 증식과 기능에 필수적인 뉴클레오타이드(DNA 구성 성분) 합성에 관여하여, 운동 후 면역력이 저하되는 '기회의 창(Open Window)'을 닫는 데 기여합니다.</p>
+                    </div>
+                    <!-- Gut Guardian -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <h3 class="text-lg font-bold mb-2">장 점막 장벽 강화</h3>
+                        <p class="text-sm text-gray-600">장 상피세포(enterocyte)의 에너지원으로 작용하여, 세포 간 치밀 이음부(Tight Junction)의 완전성을 유지합니다. 글루타민 결핍은 장 누수(Leaky Gut)를 유발, 내독소(LPS)의 혈류 유입을 증가시켜 전신 염증 반응과 피로를 악화시킬 수 있습니다.</p>
+                    </div>
+                    <!-- Muscle Protector -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <h3 class="text-lg font-bold mb-2">근손실 방지 및 회복</h3>
+                        <p class="text-sm text-gray-600">글루타민은 근육 내에서 다른 아미노산 합성에 필요한 질소(N)를 공급하는 '질소 공여체' 역할을 합니다. 또한, 주요 항산화제인 글루타치온(GSH)의 전구체로서 산화 스트레스를 감소시키고, 세포 용적을 유지하여 단백질 분해(이화작용)를 억제합니다.</p>
+                    </div>
+                     <!-- Ammonia Buffer -->
+                     <div class="bg-white p-6 rounded-lg shadow-md border">
+                        <h3 class="text-lg font-bold mb-2">암모니아 완충 시스템</h3>
+                        <p class="text-sm text-gray-600">근육에서 생성된 암모니아는 글루타민 합성효소(Glutamine Synthetase)에 의해 글루타메이트와 결합, 무독성의 글루타민으로 전환됩니다. 이 글루타민이 혈액을 통해 간과 신장으로 안전하게 운반되어 처리됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Synergy Section -->
+        <section id="synergy" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">회복 최적화를 위한 <span class="section-title">시너지 영양 성분</span></h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        피로의 다각적 원인을 공략하기 위해, 특정 생화학적 경로를 타겟하는 성분들을 전략적으로 조합해야 합니다.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg border">
+                        <h3 class="text-xl font-bold mb-2">크레아틴 모노하이드레이트</h3>
+                        <p class="text-gray-600"><strong class="text-gray-800">기전:</strong> 크레아틴 키나아제(CK)를 통해 인산크레아틴(PCr)으로 전환, 고강도 운동 시 ADP에 인산기를 제공하여 ATP를 신속히 재합성합니다. 근육 세포 내 수분을 증가시켜 단백질 합성을 촉진하는 세포 용적 효과도 가집니다.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border">
+                        <h3 class="text-xl font-bold mb-2">베타-알라닌</h3>
+                        <p class="text-gray-600"><strong class="text-gray-800">기전:</strong> 근육 내에서 카르노신(carnosine) 합성을 위한 속도-제한 전구체입니다. 카르노신은 강력한 세포 내 pH 완충제로서, 수소이온(H+)을 중화시켜 근육의 산성화를 지연시키고 운동 수행 능력을 연장합니다.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border">
+                        <h3 class="text-xl font-bold mb-2">BCAA (분지사슬아미노산)</h3>
+                        <p class="text-gray-600"><strong class="text-gray-800">기전:</strong> 류신(Leucine)은 mTOR 경로를 직접 활성화하여 근단백질 합성을 강력하게 촉진합니다. 또한 혈뇌장벽(BBB)에서 트립토판과 경쟁하여 뇌의 세로토닌 합성을 감소시킴으로써 중추성 피로를 지연시킵니다.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border">
+                        <h3 class="text-xl font-bold mb-2">오메가-3 (EPA & DHA)</h3>
+                        <p class="text-gray-600"><strong class="text-gray-800">기전:</strong> 염증 반응을 단순히 억제하는 것이 아니라, 레졸빈(resolvin), 프로텍틴(protectin) 등 '염증 해결 전문 분자(SPMs)'로 전환되어 염증을 능동적으로 종결시키고 조직의 원상 복구를 촉진합니다.</p>
+                    </div>
+                     <div class="bg-gray-50 p-6 rounded-lg border">
+                        <h3 class="text-xl font-bold mb-2">Coenzyme Q10</h3>
+                        <p class="text-gray-600"><strong class="text-gray-800">기전:</strong> 미토콘드리아 내막의 전자전달계(ETC)에서 전자를 운반하는 필수 조효소로, ATP 생산의 핵심입니다. 또한 강력한 지용성 항산화제로서 미토콘드리아 DNA와 막을 산화 스트레스로부터 보호합니다.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border">
+                        <h3 class="text-xl font-bold mb-2">마그네슘</h3>
+                        <p class="text-gray-600"><strong class="text-gray-800">기전:</strong> 300개 이상의 효소 반응에 필요한 조효소이며, ATP가 에너지를 방출하기 위해 Mg-ATP 복합체 형태로 존재해야 합니다. 근신경계의 흥분성을 조절하고, 젖산 제거에도 관여하여 회복을 돕습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section id="strategy" class="py-20 bg-gray-900 text-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">목표 지향적 영양 프로토콜 (Stacking Protocol)</h2>
+                    <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                        상황과 목표에 따라 영양소 조합을 최적화하여 회복 및 수행 능력 향상의 시너지를 극대화하십시오.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <!-- High-Intensity Performance Stack -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-cyan-300 mb-4">급성 수행능력 최적화 프로토콜</h3>
+                        <p class="text-gray-400 mb-6">무산소성 역치(anaerobic threshold)를 높여 고강도 인터벌, 중량 운동의 수행능력을 극대화하기 위한 조합.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><div class="font-bold text-cyan-300 mr-3 mt-1">Stack 1:</div><div><h4 class="font-semibold">크레아틴 (3-5g/day) + 베타알라닌 (3-5g/day)</h4><p class="text-gray-400 text-sm">ATP 재합성 촉진과 pH 완충 능력의 시너지로 최대 파워 출력 시간 및 반복 횟수 증가. 베타알라닌은 분할 섭취 권장(감각이상 방지).</p></div></li>
+                            <li class="flex items-start"><div class="font-bold text-cyan-300 mr-3 mt-1">Stack 2:</div><div><h4 class="font-semibold">시트룰린 말산 (6-8g, 운동 60분 전)</h4><p class="text-gray-400 text-sm">지속적인 NO 생성을 통한 펌핑감 및 영양소 공급 극대화. 말산염은 TCA 회로를 촉진하여 추가적인 에너지 생성을 지원.</p></div></li>
+                        </ul>
+                    </div>
+                    <!-- Post-Workout Recovery Stack -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-fuchsia-300 mb-4">회복 및 적응 촉진 프로토콜</h3>
+                        <p class="text-gray-400 mb-6">근손상 및 염증 반응을 제어하고 단백질 합성을 촉진하여 다음 훈련 세션을 대비하는 조합.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><div class="font-bold text-fuchsia-300 mr-3 mt-1">Stack 1:</div><div><h4 class="font-semibold">글루타민 (5-10g) + BCAA (5-10g, 운동 후)</h4><p class="text-gray-400 text-sm">근육 이화작용 억제, 면역/장 기능 지원(글루타민) 및 mTOR 활성화를 통한 근합성 개시(BCAA)로 회복의 기초를 다짐.</p></div></li>
+                            <li class="flex items-start"><div class="font-bold text-fuchsia-300 mr-3 mt-1">Stack 2:</div><div><h4 class="font-semibold">오메가-3 (EPA+DHA 2-3g) + 타트체리/커큐민</h4><p class="text-gray-400 text-sm">SPMs를 통한 염증의 능동적 해결과 항산화/항염증 폴리페놀의 시너지로 DOMS 및 전신 염증 감소, 회복의 질적 향상.</p></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-10">
+            <div class="text-center">
+                <h3 class="text-xl font-bold mb-2">의학적 면책 조항 (Disclaimer)</h3>
+                <p class="text-gray-400 max-w-3xl mx-auto text-sm">
+                    본 웹사이트에서 제공하는 정보는 교육 및 정보 제공을 목적으로 하며, 전문적인 의학적 조언, 진단 또는 치료를 대체할 수 없습니다. 
+                    새로운 보충제 섭취 프로그램을 시작하기 전, 특히 신장/간 질환 등 기저 질환이 있거나 약물을 복용 중인 경우, 반드시 의사, 약사 또는 자격을 갖춘 의료 전문가와 상담하시기 바랍니다. 개인의 건강 상태에 따라 특정 영양소의 섭취가 금기시될 수 있습니다.
+                </p>
+                <p class="text-gray-500 mt-6 text-xs">
+                    &copy; 2025 Comprehensive Fatigue Recovery Guide. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth Scroll Logic
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Mobile Menu Toggle Logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
